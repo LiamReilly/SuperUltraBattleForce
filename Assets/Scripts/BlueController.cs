@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class BlueController : PlayerBase
 {
-    private Vector3 CharSpeed;
-    Animator anim;
-    private bool Attacking;
-    private bool move;
-    public Healthbar2 healthBar;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +28,7 @@ public class BlueController : PlayerBase
         {
             horz = 1;
         }
-        if(!Input.GetKey(KeyCode.RightArrow)&& !Input.GetKey(KeyCode.LeftArrow))
+        if(Input.GetKey(KeyCode.RightArrow) == Input.GetKey(KeyCode.LeftArrow))
         {
             horz = 0;
         }
@@ -88,51 +82,51 @@ public class BlueController : PlayerBase
 
 
     }
-    public void moveCharacter(Vector3 amount)
+    public override void moveCharacter(Vector3 amount)
     {
         gameObject.transform.Translate(amount);
     }
-    public void RoundHouse()
+    public override void RoundHouse()
     {
         Attacking = true;
         anim.SetTrigger("RoundHouse");
     }
-    public void Jump()
+    public override void Jump()
     {
         Attacking = true;
         anim.SetTrigger("Jump");
     }
-    public void Punch()
+    public override void Punch()
     {
         Attacking = true;
         anim.SetTrigger("Punch");
     }
-    public void Taunt()
+    public override void Taunt()
     {
         Attacking = true;
         anim.SetTrigger("Taunt");
     }
-    public void Hadouken()
+    public override void Hadouken()
     {
         Attacking = true;
         anim.SetTrigger("Hadouken");
         StartCoroutine(waitforHadouken(1.8f));
     }
-    IEnumerator waitforattack(float f)
+    protected override IEnumerator waitforattack(float f)
     {
         yield return new WaitForSeconds(f);
         Attacking = false;
 
     }
-    IEnumerator waitforHadouken(float f)
+    protected override IEnumerator waitforHadouken(float f)
     {
         yield return new WaitForSeconds(f);
-        Instantiate(Projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f, gameObject.transform.position.z + 0.2f), Quaternion.identity);
+        Hadouken h = Instantiate(Projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f, gameObject.transform.position.z+0.2f), Quaternion.identity).GetComponent<Hadouken>();
+        if(isFacingRight){
+            h.Initialize(Vector3.forward, this);
+        }else{
+            h.Initialize(-Vector3.forward, this);
+        }    
     }
-    public void DamagePlayer(int damage)
-    {
-        currHealth -= damage;
 
-        healthBar.SetHealth(currHealth);
-    }
 }

@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class healthBar : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
-    public Slider healBar;
-    public RedController playerHealth;
+    public Slider healthBar;
+    public PlayerBase playerHealth;
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerHealth = GameObject.FindGameObjectWithTag("Player1").GetComponent<RedController>();
-        healBar = GetComponent<Slider>();
-        healBar.maxValue = playerHealth.maxHealth;
-        healBar.value = playerHealth.maxHealth;
+        playerHealth = player.GetComponent<PlayerBase>();
+        healthBar = GetComponent<Slider>();
+        healthBar.maxValue = playerHealth.maxHealth;
+        healthBar.value = playerHealth.maxHealth;
     }
 
     public void SetHealth(int hp)
     {
-        healBar.value = hp;
+        healthBar.value = hp;
     }
 }
