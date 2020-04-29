@@ -5,8 +5,8 @@ using UnityEngine;
 public abstract class PlayerBase : MonoBehaviour
 {
     [Header("Character Specifics")]
-    public int currHealth;
-    public int maxHealth;
+    public float currHealth;
+    public float maxHealth;
     public string characterName;
     public float baseAttack;
     public float Speed;
@@ -28,7 +28,7 @@ public abstract class PlayerBase : MonoBehaviour
     protected abstract IEnumerator waitforattack(float f);
     protected abstract IEnumerator waitforHadouken(float f);
 
-    public void DamagePlayer(int damage)
+    public void DamagePlayer(float damage)
     {
         currHealth -= damage;
 

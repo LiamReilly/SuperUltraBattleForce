@@ -45,35 +45,36 @@ public class RedController : PlayerBase
         anim.SetBool("Move", move);
         if (horz > 0) anim.SetFloat("Velocity", 1);
         if (horz < 0) anim.SetFloat("Velocity", -1);
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            RoundHouse();
-            StartCoroutine(waitforattack(1.8f));
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Jump();
-            StartCoroutine(waitforattack(1f));
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            Punch();
-            StartCoroutine(waitforattack(2f));
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Taunt();
-            StartCoroutine(waitforattack(4.45f));
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            Hadouken();
-            StartCoroutine(waitforattack(3.6f));
-        }
-
+        
         CharSpeed = new Vector3(0f, 0f, horz);
         if (!Attacking)
         {
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                RoundHouse();
+                StartCoroutine(waitforattack(1.2f));
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                Jump();
+                StartCoroutine(waitforattack(1f));
+            }
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                Punch();
+                StartCoroutine(waitforattack(1.2f));
+            }
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                Taunt();
+                StartCoroutine(waitforattack(4.45f));
+            }
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                Hadouken();
+                StartCoroutine(waitforattack(3.6f));
+            }
+
             moveCharacter(CharSpeed);
         }
         if (Input.GetKeyDown(KeyCode.Delete))
@@ -122,7 +123,7 @@ public class RedController : PlayerBase
     protected override IEnumerator waitforHadouken(float f)
     {
         yield return new WaitForSeconds(f);
-        Hadouken h = Instantiate(Projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f, gameObject.transform.position.z+0.2f), Quaternion.identity).GetComponent<Hadouken>();
+        Hadouken h = Instantiate(Projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f, gameObject.transform.position.z), Quaternion.identity).GetComponent<Hadouken>();
         if(isFacingRight){
             h.Initialize(Vector3.forward, this);
         }else{
