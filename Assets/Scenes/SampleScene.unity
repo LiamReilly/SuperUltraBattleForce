@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -235,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265269949}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 7.850002, y: 1.7320507, z: 0.0000010721586}
+  m_LocalPosition: {x: 7.850002, y: 1.7320507, z: 0.0000010726643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 454985913}
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 346874014}
   player: {fileID: 346874009}
 --- !u!114 &448416727
 MonoBehaviour:
@@ -880,7 +880,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: -14.577202, z: 7.96e-43, w: -5.966835}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -892,7 +892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 7.12, y: 4.09, z: -9.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -950,7 +950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 326884292}
   player: {fileID: 326884289}
 --- !u!114 &776245527
 MonoBehaviour:
@@ -1082,7 +1082,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 7.850002, y: 1.7320507, z: 0.0000010721586}
+  m_LocalPosition: {x: 7.850002, y: 1.7320507, z: 0.0000010726643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1278,7 +1278,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a460c7c070b1ce0468394c723e21d2ee, type: 2}
+  - {fileID: 2100000, guid: d82f045abc0e7374bbf6ace53832c149, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1506,11 +1506,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: d72209ef2cb3fb646ad776bc122783ed,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 3ae2fead57ef08842a3b642cf081b0bb, type: 2}
     - target: {fileID: -4216859302048453862, guid: d72209ef2cb3fb646ad776bc122783ed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1566,6 +1561,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: d72209ef2cb3fb646ad776bc122783ed,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3ae2fead57ef08842a3b642cf081b0bb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d72209ef2cb3fb646ad776bc122783ed, type: 3}
 --- !u!1 &1626926730
