@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     public GameObject GameTypeButtons;
     private string GameType;
     public GameObject StageSelect;
+    private AudioSource Music;
+    public AudioSource Button;
+    public GameObject Options;
     // Start is called before the first frame update
     void Awake()
     {
@@ -29,6 +32,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         timer = GameObject.Find("Timer").GetComponent<Text>();
+        Music = GetComponent<AudioSource>();
+        Button = transform.GetChild(0).GetComponent<AudioSource>();
         //print(timer.name);
     }
     // Update is called once per frame
@@ -84,32 +89,40 @@ public class GameManager : MonoBehaviour
     #region Buttons
     public void GameStart()
     {
+        Button.Play();
         startButtons.SetActive(false);
         GameTypeButtons.SetActive(true);
     }
     public void LoadLevel(string pickedLevel)
     {
+        Button.Play();
         SceneManager.LoadScene(pickedLevel);
         matchStart = true;
     }
     public void QuitGame()
     {
+        Button.Play();
         startButtons.SetActive(false);
         print("Quit the game");
         Application.Quit();
     }
     public void Pause()
     {
+        Button.Play();
+        Music.volume /= 2f;
         Time.timeScale = 0;
         PauseItems.SetActive(true);
     }
     public void UnPause()
     {
+        Button.Play();
+        Music.volume *= 2f;
         Time.timeScale = 1;
         PauseItems.SetActive(false);
     }
     public void ReturnToMain()
     {
+        Button.Play();
         UnPause();
         SceneManager.LoadScene("StartMenu");
         matchStart = false;
@@ -117,50 +130,83 @@ public class GameManager : MonoBehaviour
     }
     public void OptionsMenu()
     {
-        print("this doesn't do anything yet");
+        Button.Play();
+        Music.volume *= 2f;
+        PauseItems.SetActive(false);
+        Options.SetActive(true);
         //plan to have mute button and other functionality
+    }
+    public void ReturnFromOptions()
+    {
+        Button.Play();
+        Music.volume /= 2f;
+        Options.SetActive(false);
+        PauseItems.SetActive(true);
+    }
+    public void LowerVolume()
+    {
+        if (Music.volume > 0)
+        {
+            Music.volume-= 0.1f;
+        }
+    }
+    public void RaiseVolume()
+    {
+        if (Music.volume < 1f)
+        {
+            Music.volume += 0.1f;
+        }
     }
     public void onePlayer()
     {
+        Button.Play();
         GameType = "onePlayer";
         showStages();
         //when we have these different modes, will change which prefab fighters to load into each level
     }
     public void twoPlayer()
     {
+        Button.Play();
         GameType = "twoPlayer";
         showStages();
     }
     public void Training()
     {
+        Button.Play();
         GameType = "Training";
         showStages();
     }
     public void Cockfight()
     {
+        Button.Play();
         GameType = "Cockfight";
         showStages();
     }
     public void showStages()
     {
+        Button.Play();
         GameTypeButtons.SetActive(false);
         StageSelect.SetActive(true);
     }
     public void Stage1()
     {
+        Button.Play();
         print("this doesn't do anything yet");
     }
     public void Dojolevel()
     {
+        Button.Play();
         StageSelect.SetActive(false);
         LoadLevel("SampleScene");
     }
     public void Stage3()
     {
+        Button.Play();
         print("this doesn't do anything yet");
     }
     public void Stage4()
     {
+        Button.Play();
         print("this doesn't do anything yet");
     }
     #endregion

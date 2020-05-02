@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class BlueController : PlayerBase
 {
+    
+    
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         currHealth = 100;
         maxHealth = 100;
@@ -99,6 +102,7 @@ public class BlueController : PlayerBase
     {
         Attacking = true;
         anim.SetTrigger("Punch");
+        //audioSource.PlayOneShot(punch, 0.1f);
     }
     public override void Taunt()
     {
@@ -125,7 +129,8 @@ public class BlueController : PlayerBase
             h.Initialize(Vector3.forward, this);
         }else{
             h.Initialize(-Vector3.forward, this);
-        }    
+        }
+        audioSource.PlayOneShot(hadouken, 0.1f);
     }
 
 }

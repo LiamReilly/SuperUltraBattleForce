@@ -13,11 +13,15 @@ public abstract class PlayerBase : MonoBehaviour
     public GameObject Projectile;
     public HealthBar healthBar;
     public bool isFacingRight;
+    public AudioSource audioSource;
+    public AudioClip hadouken;
+    public AudioClip punch;
 
     protected Vector3 CharSpeed;
     protected Animator anim;
     protected bool Attacking;
     protected bool move;
+    
 
     public abstract void moveCharacter(Vector3 amount);
     public abstract void RoundHouse();
