@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Player1
   - Player2
+  - Temp
+  - Perm
+  - excess
   layers:
   - Default
   - TransparentFX
