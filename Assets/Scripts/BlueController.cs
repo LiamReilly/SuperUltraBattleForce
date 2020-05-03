@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class BlueController : PlayerBase
 {
-<<<<<<< HEAD
     public const float JumpCooldown = 1f;
     public const float KickCooldown = 1.2f;
     public const float PunchCooldown = 1.2f;
     public const float HadoukenCooldown = 0.9f;
     public const float TauntCooldown = 2.7f;
 
-
-=======
-    
-    
->>>>>>> 2778617f8c791d5d22d06f909c7e54621ec1349d
     // Start is called before the first frame update
     void Start()
     {
@@ -143,10 +137,7 @@ public class BlueController : PlayerBase
         {
             h.Initialize(-Vector3.forward, this);
         }
-<<<<<<< HEAD
-=======
         audioSource.PlayOneShot(hadouken, 0.1f);
->>>>>>> 2778617f8c791d5d22d06f909c7e54621ec1349d
     }
 
 }
