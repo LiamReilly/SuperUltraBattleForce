@@ -10,7 +10,6 @@ public class RedController : PlayerBase
     public const float HadoukenCooldown = 0.9f;
     public const float TauntCooldown = 4.45f;
 
-
     // Start is called before the first frame update
     void Start()
     {
