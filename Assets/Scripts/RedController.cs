@@ -16,12 +16,12 @@ public class RedController : PlayerBase
         audioSource = GetComponent<AudioSource>();
         if (gameObject.transform.position.z < 0)
         {
-            healthBar = GameObject.FindGameObjectWithTag("Bar1").GetComponent<HealthBar>();
+            //healthBar = GameObject.FindGameObjectWithTag("Bar1").GetComponent<HealthBar>();
             isFacingRight = true;
         }
         else
         {
-           healthBar = GameObject.FindGameObjectWithTag("Bar2").GetComponent<HealthBar>();
+           //healthBar = GameObject.FindGameObjectWithTag("Bar2").GetComponent<HealthBar>();
            isFacingRight = false;
         } 
         anim = GetComponent<Animator>();

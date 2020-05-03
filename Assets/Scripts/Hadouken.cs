@@ -10,6 +10,7 @@ public class Hadouken : MonoBehaviour
     private Rigidbody rb;
     private ParticleSystem explosion;
     private MeshRenderer mesh;
+    bool hit = false;
 
     public void Initialize(Vector3 direction, PlayerBase owner){
         this.direction = direction;
@@ -37,11 +38,12 @@ public class Hadouken : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if(collision.gameObject.CompareTag("Player")){
+
+        if (collision.gameObject.CompareTag("Player")|| collision.gameObject.CompareTag("Player2")){
             PlayerBase playerRef = collision.gameObject.GetComponent<PlayerBase>();
-            if(playerRef != owner){
+            if(playerRef != owner&&!hit){
                 playerRef.DamagePlayer(10f*owner.baseAttack);
+                hit = true;
             }
         }
         mesh.enabled = false;

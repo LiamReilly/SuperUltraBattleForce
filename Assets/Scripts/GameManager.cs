@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public Text timer;
     bool matchStart = false;
     public GameObject PauseItems;
-    //private int count = 0;
+    private int count = 0;
     public GameObject startButtons;
     public GameObject GameTypeButtons;
     private string GameType;
@@ -26,11 +26,16 @@ public class GameManager : MonoBehaviour
     public GameObject Players;
     public GameObject Player1;
     public GameObject Player2;
+    public GameObject Player3;
+    public GameObject Player4;
+    public GameObject Health;
     public HealthBar bar1;
     public HealthBar bar2;
     // Start is called before the first frame update
     void Awake()
     {
+        bar1 = Health.transform.GetChild(0).gameObject.GetComponent<HealthBar>();
+        bar2 = Health.transform.GetChild(1).gameObject.GetComponent<HealthBar>();
         SceneManager.activeSceneChanged += ChangedActiveScene;
         //PauseItems.SetActive(false);
     }
@@ -73,12 +78,16 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("StartMenu");
             startButtons.SetActive(true);
         }
-        if(next.name == "StartMenu"&&startButtons!=null) startButtons.SetActive(true);
+        if (next.name == "StartMenu" && startButtons != null)
+        {
+            startButtons.SetActive(true);
+            Health.SetActive(false);
+        }
         timer = GameObject.Find("Timer").GetComponent<Text>();
         PauseItems = GameObject.Find("PauseItems");
         //if(PauseItems.activeSelf &&PauseItems!=null) PauseItems.SetActive(false); 
         gameTime = maxGameTime;
-       /* if(count>0)
+        if(count>0)
         {
             //print(count);
             var temp = GameObject.FindGameObjectsWithTag("Temp");
@@ -89,27 +98,27 @@ public class GameManager : MonoBehaviour
             var perm = GameObject.FindGameObjectWithTag("Perm");
             PauseItems = perm.transform.GetChild(0).gameObject;
         }
-        count++;*/
+        count++;
         timer = GameObject.Find("Timer").GetComponent<Text>();
         if (SceneManager.GetActiveScene().name != "StartMenu" && SceneManager.GetActiveScene().name != "PreLoading")
         {
             Players = GameObject.Find("Players");
             if (CharacterChip.CharacterSelected.Equals("Blue") && Player2Chip.CharacterSelected.Equals("Red"))
             {
-                var p1 = Instantiate(Player2, Players.transform.GetChild(0).position, Quaternion.identity);
-                var p2 = Instantiate(Player1, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
-                p2.GetComponent<BlueController>().enabled = false;
-                p2.AddComponent<RedController>();
-                p1.GetComponent<RedController>().enabled = false;
-                p2.AddComponent<BlueController>();
+                var p1 = Instantiate(Player4, Players.transform.GetChild(0).position, Quaternion.identity);
+                var p2 = Instantiate(Player3, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
+                /*p1.GetComponent<BlueController>().enabled = false;
+                p1.AddComponent<RedController>();
+                p2.GetComponent<RedController>().enabled = false;
+                p2.AddComponent<BlueController>();*/
                 FinishLevelSetup(p1, p2);
             }
             if (CharacterChip.CharacterSelected.Equals("Red") && Player2Chip.CharacterSelected.Equals("Red"))
             {
                 var p1 = Instantiate(Player1, Players.transform.GetChild(0).position, Quaternion.identity);
-                var p2 = Instantiate(Player1, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
-                p2.GetComponent<RedController>().enabled = false;
-                p2.AddComponent<BlueController>();
+                var p2 = Instantiate(Player3, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
+               /* p2.GetComponent<RedController>().enabled = false;
+                p2.AddComponent<BlueController>();*/
                 FinishLevelSetup(p1, p2);
             }
             if(CharacterChip.CharacterSelected.Equals("Red") && Player2Chip.CharacterSelected.Equals("Blue"))
@@ -120,14 +129,14 @@ public class GameManager : MonoBehaviour
             }
             if (CharacterChip.CharacterSelected.Equals("Blue") && Player2Chip.CharacterSelected.Equals("Blue"))
             {
-                var p1 = Instantiate(Player2, Players.transform.GetChild(0).position, Quaternion.identity);
+                var p1 = Instantiate(Player4, Players.transform.GetChild(0).position, Quaternion.identity);
                 var p2 = Instantiate(Player2, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
-                p1.GetComponent<BlueController>().enabled = false;
-                p1.AddComponent<RedController>();
+               /* p1.GetComponent<BlueController>().enabled = false;
+                p1.AddComponent<RedController>();*/
                 FinishLevelSetup(p1, p2);
             }
             
-            
+
         }
     }
     #region Buttons
@@ -285,10 +294,17 @@ public class GameManager : MonoBehaviour
         Players.transform.GetChild(0).SetParent(null);
         placeholder2.SetParent(p2.transform);
         Destroy(Players);
-        bar1 = GameObject.FindGameObjectWithTag("Bar1").GetComponent<HealthBar>();
-        bar1.SetUp(p1);
-        bar2 = GameObject.Find("Canvas").transform.GetChild(1).GetComponent<HealthBar>();
+        Health.SetActive(true);
+        //var playerbases  = p1.GetComponents<PlayerBase>();
         p2.tag = "Player2";
-        //bar2.SetUp(p2);
+        //playerbases[1].healthBar = bar1;
+        p1.GetComponent<PlayerBase>().healthBar = bar1;
+        p2.GetComponent<PlayerBase>().healthBar = bar2;
+        //bar1.SetUp(playerbases[1]);
+        //bar1.SetUp(p1.GetComponent<PlayerBase>());
+        //bar2.SetUp(p2.GetComponent<PlayerBase>());
+        print("Hello Sir");
+        
+
     }
 }
