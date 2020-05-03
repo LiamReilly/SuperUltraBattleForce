@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class RedController : PlayerBase
 {   
+    public const float JumpCooldown = 1f;
+    public const float KickCooldown = 1.2f;
+    public const float PunchCooldown = 0f;
+    public const float HadoukenCooldown = 0.9f;
+    public const float TauntCooldown = 4.45f;
 
     // Start is called before the first frame update
     void Start()
@@ -64,27 +69,27 @@ public class RedController : PlayerBase
             if (Input.GetKeyDown(KeyCode.J))
             {
                 RoundHouse();
-                StartCoroutine(waitforattack(1.2f));
+                StartCoroutine(waitforattack(KickCooldown));
             }
             if (Input.GetKeyDown(KeyCode.W))
             {
                 Jump();
-                StartCoroutine(waitforattack(1f));
+                StartCoroutine(waitforattack(JumpCooldown));
             }
             if (Input.GetKeyDown(KeyCode.U))
             {
                 Punch();
-                StartCoroutine(waitforattack(1.2f));
+                StartCoroutine(waitforattack(PunchCooldown));
             }
             if (Input.GetKeyDown(KeyCode.N))
             {
                 Taunt();
-                StartCoroutine(waitforattack(4.45f));
+                StartCoroutine(waitforattack(TauntCooldown));
             }
             if (Input.GetKeyDown(KeyCode.O))
             {
                 Hadouken();
-                StartCoroutine(waitforattack(3.6f));
+                StartCoroutine(waitforattack(HadoukenCooldown));
             }
 
             moveCharacter(CharSpeed);
@@ -124,7 +129,7 @@ public class RedController : PlayerBase
     {
         Attacking = true;
         anim.SetTrigger("Hadouken");
-        StartCoroutine(waitforHadouken(1.8f));
+        StartCoroutine(waitforHadouken(0.9f));
     }
     protected override IEnumerator waitforattack(float f)
     {
