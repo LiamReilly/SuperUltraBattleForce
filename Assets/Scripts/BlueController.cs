@@ -10,12 +10,23 @@ public class BlueController : PlayerBase
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (gameObject.transform.position.z < 0)
+        {
+            healthBar = GameObject.FindGameObjectWithTag("Bar1").GetComponent<HealthBar>();
+            isFacingRight = true;
+        }
+        else
+        {
+            healthBar = GameObject.FindGameObjectWithTag("Bar2").GetComponent<HealthBar>();
+            isFacingRight = false;
+        }
         anim = GetComponent<Animator>();
         currHealth = 100;
         maxHealth = 100;
         characterName = "Blue Guy";
         baseAttack = 1.3f;
         Speed = 1.7f;
+        Projectile = (GameObject)Resources.Load("Prefab/RedHadouken", typeof(GameObject));
 
     }
 

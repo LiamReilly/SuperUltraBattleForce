@@ -8,18 +8,24 @@ public class HealthBar : MonoBehaviour
     public Slider healthBar;
     public PlayerBase playerHealth;
     public GameObject player;
-
     // Start is called before the first frame update
     void Start()
     {
-        playerHealth = player.GetComponent<PlayerBase>();
+       
         healthBar = GetComponent<Slider>();
-        healthBar.maxValue = playerHealth.maxHealth;
-        healthBar.value = playerHealth.maxHealth;
+        
     }
+
 
     public void SetHealth(float hp)
     {
         healthBar.value = hp;
+    }
+    public void SetUp(GameObject play)
+    {
+        //player = play;
+        //playerHealth = player.GetComponent<PlayerBase>();
+        //healthBar.maxValue = playerHealth.maxHealth;
+        //healthBar.value = 100f;
     }
 }

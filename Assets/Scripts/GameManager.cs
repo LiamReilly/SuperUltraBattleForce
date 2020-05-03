@@ -14,14 +14,20 @@ public class GameManager : MonoBehaviour
     public Text timer;
     bool matchStart = false;
     public GameObject PauseItems;
-    private int count = 0;
+    //private int count = 0;
     public GameObject startButtons;
     public GameObject GameTypeButtons;
     private string GameType;
     public GameObject StageSelect;
+    public GameObject CharacterSelect;
     private AudioSource Music;
     public AudioSource Button;
     public GameObject Options;
+    public GameObject Players;
+    public GameObject Player1;
+    public GameObject Player2;
+    public HealthBar bar1;
+    public HealthBar bar2;
     // Start is called before the first frame update
     void Awake()
     {
@@ -72,7 +78,7 @@ public class GameManager : MonoBehaviour
         PauseItems = GameObject.Find("PauseItems");
         //if(PauseItems.activeSelf &&PauseItems!=null) PauseItems.SetActive(false); 
         gameTime = maxGameTime;
-        if(count>0)
+       /* if(count>0)
         {
             //print(count);
             var temp = GameObject.FindGameObjectsWithTag("Temp");
@@ -83,8 +89,46 @@ public class GameManager : MonoBehaviour
             var perm = GameObject.FindGameObjectWithTag("Perm");
             PauseItems = perm.transform.GetChild(0).gameObject;
         }
-        count++;
+        count++;*/
         timer = GameObject.Find("Timer").GetComponent<Text>();
+        if (SceneManager.GetActiveScene().name != "StartMenu" && SceneManager.GetActiveScene().name != "PreLoading")
+        {
+            Players = GameObject.Find("Players");
+            if (CharacterChip.CharacterSelected.Equals("Blue") && Player2Chip.CharacterSelected.Equals("Red"))
+            {
+                var p1 = Instantiate(Player2, Players.transform.GetChild(0).position, Quaternion.identity);
+                var p2 = Instantiate(Player1, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
+                p2.GetComponent<BlueController>().enabled = false;
+                p2.AddComponent<RedController>();
+                p1.GetComponent<RedController>().enabled = false;
+                p2.AddComponent<BlueController>();
+                FinishLevelSetup(p1, p2);
+            }
+            if (CharacterChip.CharacterSelected.Equals("Red") && Player2Chip.CharacterSelected.Equals("Red"))
+            {
+                var p1 = Instantiate(Player1, Players.transform.GetChild(0).position, Quaternion.identity);
+                var p2 = Instantiate(Player1, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
+                p2.GetComponent<RedController>().enabled = false;
+                p2.AddComponent<BlueController>();
+                FinishLevelSetup(p1, p2);
+            }
+            if(CharacterChip.CharacterSelected.Equals("Red") && Player2Chip.CharacterSelected.Equals("Blue"))
+            {
+                var p1 = Instantiate(Player1, Players.transform.GetChild(0).position, Quaternion.identity);
+                var p2 = Instantiate(Player2, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
+                FinishLevelSetup(p1, p2);
+            }
+            if (CharacterChip.CharacterSelected.Equals("Blue") && Player2Chip.CharacterSelected.Equals("Blue"))
+            {
+                var p1 = Instantiate(Player2, Players.transform.GetChild(0).position, Quaternion.identity);
+                var p2 = Instantiate(Player2, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
+                p1.GetComponent<BlueController>().enabled = false;
+                p1.AddComponent<RedController>();
+                FinishLevelSetup(p1, p2);
+            }
+            
+            
+        }
     }
     #region Buttons
     public void GameStart()
@@ -161,31 +205,38 @@ public class GameManager : MonoBehaviour
     {
         Button.Play();
         GameType = "onePlayer";
-        showStages();
+        showCharacters();
         //when we have these different modes, will change which prefab fighters to load into each level
     }
     public void twoPlayer()
     {
         Button.Play();
         GameType = "twoPlayer";
-        showStages();
+        showCharacters();
     }
     public void Training()
     {
         Button.Play();
         GameType = "Training";
-        showStages();
+        showCharacters();
     }
     public void Cockfight()
     {
         Button.Play();
         GameType = "Cockfight";
-        showStages();
+        showCharacters();
+    }
+    void showCharacters()
+    {
+        Button.Play();
+        GameTypeButtons.SetActive(false);
+        CharacterSelect.SetActive(true);
+        StartCoroutine(WaitForSelection(1f));
+        //showStages();
     }
     public void showStages()
     {
         Button.Play();
-        GameTypeButtons.SetActive(false);
         StageSelect.SetActive(true);
     }
     public void Stage1()
@@ -197,7 +248,7 @@ public class GameManager : MonoBehaviour
     {
         Button.Play();
         StageSelect.SetActive(false);
-        LoadLevel("SampleScene");
+        LoadLevel("Dojo");
     }
     public void Stage3()
     {
@@ -210,4 +261,34 @@ public class GameManager : MonoBehaviour
         print("this doesn't do anything yet");
     }
     #endregion
+    IEnumerator WaitForSelection(float f)
+    {
+        if (CharacterChip.Selected && Player2Chip.Selected)
+        {
+            
+            CharacterSelect.SetActive(false);
+            showStages();
+        }
+        else
+        {
+            yield return new WaitForSeconds(f);
+            yield return WaitForSelection(1.5f);
+        }
+        
+    }
+    void FinishLevelSetup(GameObject p1, GameObject p2)
+    {
+        var placeholder1 = Players.transform.GetChild(0);
+        Players.transform.GetChild(0).SetParent(null);
+        placeholder1.SetParent(p1.transform);
+        var placeholder2 = Players.transform.GetChild(0);
+        Players.transform.GetChild(0).SetParent(null);
+        placeholder2.SetParent(p2.transform);
+        Destroy(Players);
+        bar1 = GameObject.FindGameObjectWithTag("Bar1").GetComponent<HealthBar>();
+        bar1.SetUp(p1);
+        bar2 = GameObject.Find("Canvas").transform.GetChild(1).GetComponent<HealthBar>();
+        p2.tag = "Player2";
+        //bar2.SetUp(p2);
+    }
 }

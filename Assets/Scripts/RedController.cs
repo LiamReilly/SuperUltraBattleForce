@@ -8,18 +8,30 @@ public class RedController : PlayerBase
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        if (gameObject.transform.position.z < 0)
+        {
+            healthBar = GameObject.FindGameObjectWithTag("Bar1").GetComponent<HealthBar>();
+            isFacingRight = true;
+        }
+        else
+        {
+           healthBar = GameObject.FindGameObjectWithTag("Bar2").GetComponent<HealthBar>();
+           isFacingRight = false;
+        } 
         anim = GetComponent<Animator>();
         currHealth = 100;
         maxHealth = 100;
         characterName = "Red Girl";
         baseAttack = 1;
         Speed = 2;
-
+        Projectile = (GameObject)Resources.Load("Prefab/BlueHadouken", typeof(GameObject));
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         float horz = 0;
         if (Input.GetKey(KeyCode.A))
         {

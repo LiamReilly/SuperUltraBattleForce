@@ -17,6 +17,7 @@ public class Hadouken : MonoBehaviour
     }
     private void Start()
     {
+        gameObject.SetActive(true);
         rb = GetComponent<Rigidbody>();
         rb.detectCollisions = false;
         explosion = GetComponentInChildren<ParticleSystem>();

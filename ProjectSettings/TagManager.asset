@@ -9,6 +9,8 @@ TagManager:
   - Temp
   - Perm
   - excess
+  - Bar1
+  - Bar2
   layers:
   - Default
   - TransparentFX
