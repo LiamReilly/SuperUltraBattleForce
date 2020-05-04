@@ -21,7 +21,9 @@ public abstract class PlayerBase : MonoBehaviour
     protected Animator anim;
     protected bool Attacking;
     protected bool move;
-    
+
+    public Hitbox LHand, LFoot, RHand, RFoot;
+
 
     public abstract void moveCharacter(Vector3 amount);
     public abstract void RoundHouse();
