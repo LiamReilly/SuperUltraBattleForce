@@ -11,6 +11,7 @@ public class Hadouken : MonoBehaviour
     private ParticleSystem explosion;
     private MeshRenderer mesh;
     bool hit = false;
+    private AudioSource Audio;
 
     public void Initialize(Vector3 direction, PlayerBase owner){
         this.direction = direction;
@@ -24,6 +25,7 @@ public class Hadouken : MonoBehaviour
         explosion = GetComponentInChildren<ParticleSystem>();
         mesh = GetComponent<MeshRenderer>();
         explosion.Pause();
+        Audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -48,6 +50,7 @@ public class Hadouken : MonoBehaviour
         }
         mesh.enabled = false;
         explosion.Play();
+        Audio.Play();
         StartCoroutine(DestroyHadouken());
     }
     IEnumerator DestroyHadouken()
@@ -56,5 +59,9 @@ public class Hadouken : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         explosion.Pause();
         Destroy(gameObject);
+    }
+    private void OnDestroy()
+    {
+        Audio = null;
     }
 }

@@ -745,7 +745,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f62fe212fd75cad47a80dad6378416ba, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2562,11 +2562,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6331028804397638892}
     m_Modifications:
-    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: m_Name
-      value: LFootBox
-      objectReference: {fileID: 0}
+      propertyPath: parentChar
+      value: 
+      objectReference: {fileID: 3628890122024774791}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2622,11 +2622,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: parentChar
-      value: 
-      objectReference: {fileID: 3628890122024774791}
+      propertyPath: m_Name
+      value: LFootBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bd0671eb56af04bb6aedb18911fc28, type: 3}
 --- !u!4 &4123702397506111355 stripped
@@ -2654,11 +2654,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1311292107758885367}
     m_Modifications:
-    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: m_Name
-      value: RHandBox
-      objectReference: {fileID: 0}
+      propertyPath: parentChar
+      value: 
+      objectReference: {fileID: 3628890122024774791}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2729,11 +2729,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.20000042
       objectReference: {fileID: 0}
-    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: parentChar
-      value: 
-      objectReference: {fileID: 3628890122024774791}
+      propertyPath: m_Name
+      value: RHandBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bd0671eb56af04bb6aedb18911fc28, type: 3}
 --- !u!114 &7920032055259598977 stripped
@@ -2761,11 +2761,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7520039994390560146}
     m_Modifications:
-    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: m_Name
-      value: RFootBox
-      objectReference: {fileID: 0}
+      propertyPath: parentChar
+      value: 
+      objectReference: {fileID: 3628890122024774791}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2821,11 +2821,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: parentChar
-      value: 
-      objectReference: {fileID: 3628890122024774791}
+      propertyPath: m_Name
+      value: RFootBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bd0671eb56af04bb6aedb18911fc28, type: 3}
 --- !u!114 &7427261489345883454 stripped
@@ -2853,11 +2853,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8481903220039289388}
     m_Modifications:
-    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: m_Name
-      value: LHandBox
-      objectReference: {fileID: 0}
+      propertyPath: parentChar
+      value: 
+      objectReference: {fileID: 3628890122024774791}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2928,11 +2928,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: parentChar
-      value: 
-      objectReference: {fileID: 3628890122024774791}
+      propertyPath: m_Name
+      value: LHandBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bd0671eb56af04bb6aedb18911fc28, type: 3}
 --- !u!114 &7122355065340316605 stripped

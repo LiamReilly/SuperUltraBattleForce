@@ -5,10 +5,12 @@ using UnityEngine;
 public class BlueController : PlayerBase
 {
     public const float JumpCooldown = 1f;
-    public const float KickCooldown = 1.2f;
-    public const float PunchCooldown = 1.2f;
+    public const float KickCooldown = 0.9f;
+    public const float PunchCooldown = 0.8f;
     public const float HadoukenCooldown = 0.9f;
     public const float TauntCooldown = 2.7f;
+    public const float JabCooldown = 0.45f;
+    public const float QuickKickCooldown = 0.6f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,7 @@ public class BlueController : PlayerBase
         characterName = "Blue Guy";
         baseAttack = 1.3f;
         Speed = 1.7f;
-        Projectile = (GameObject)Resources.Load("Prefab/RedHadouken", typeof(GameObject));
+        //Projectile = (GameObject)Resources.Load("Prefab/RedHadouken", typeof(GameObject));
 
     }
 
@@ -65,17 +67,27 @@ public class BlueController : PlayerBase
         CharSpeed = new Vector3(0f, 0f, horz);
         if (!Attacking)
         {
-            if (Input.GetKeyDown(KeyCode.Keypad1))
+            if (Input.GetKeyDown(KeyCode.Keypad2))
             {
                 RoundHouse();
                 StartCoroutine(waitforattack(KickCooldown));
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad4))
+            {
+                Jab();
+                StartCoroutine(waitforattack(JabCooldown));
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                QuickKick();
+                StartCoroutine(waitforattack(QuickKickCooldown));
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 Jump();
                 StartCoroutine(waitforattack(JumpCooldown));
             }
-            if (Input.GetKeyDown(KeyCode.Keypad4))
+            if (Input.GetKeyDown(KeyCode.Keypad5))
             {
                 Punch();
                 StartCoroutine(waitforattack(PunchCooldown));
@@ -129,6 +141,16 @@ public class BlueController : PlayerBase
         Attacking = true;
         anim.SetTrigger("Hadouken");
         StartCoroutine(waitforHadouken(0.9f));
+    }
+    public override void Jab()
+    {
+        Attacking = true;
+        anim.SetTrigger("Jab");
+    }
+    public override void QuickKick()
+    {
+        Attacking = true;
+        anim.SetTrigger("QuickKick");
     }
     protected override IEnumerator waitforattack(float f)
     {

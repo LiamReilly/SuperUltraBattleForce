@@ -27,7 +27,9 @@ public abstract class PlayerBase : MonoBehaviour
 
     public abstract void moveCharacter(Vector3 amount);
     public abstract void RoundHouse();
+    public abstract void QuickKick();
     public abstract void Jump();
+    public abstract void Jab();
     public abstract void Punch();
     public abstract void Taunt();
     public abstract void Hadouken();

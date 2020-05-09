@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     public GameObject Health;
     public HealthBar bar1;
     public HealthBar bar2;
+    private GameObject MusicChanger;
+    public AudioClip[] Songs;
+    private int CurrentSong;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -45,6 +49,7 @@ public class GameManager : MonoBehaviour
         timer = GameObject.Find("Timer").GetComponent<Text>();
         Music = GetComponent<AudioSource>();
         Button = transform.GetChild(0).GetComponent<AudioSource>();
+        MusicChanger = StageSelect.transform.GetChild(4).gameObject;
         //print(timer.name);
     }
     // Update is called once per frame
@@ -247,6 +252,8 @@ public class GameManager : MonoBehaviour
     {
         Button.Play();
         StageSelect.SetActive(true);
+        MusicChanger.GetComponentInChildren<Text>().text = Songs[CurrentSong].name;
+        MusicChanger.transform.GetChild(1).GetComponent<Button>().interactable = false;
     }
     public void Stage1()
     {
@@ -268,6 +275,30 @@ public class GameManager : MonoBehaviour
     {
         Button.Play();
         print("this doesn't do anything yet");
+    }
+    public void MusicLeft()
+    {
+            CurrentSong--;
+            if (MusicChanger.transform.GetChild(2).GetComponent<Button>().interactable == false) MusicChanger.transform.GetChild(2).GetComponent<Button>().interactable = true;
+            if (CurrentSong == 0)
+            {
+                MusicChanger.transform.GetChild(1).GetComponent<Button>().interactable = false;
+            }
+            Music.clip = Songs[CurrentSong];
+            Music.Play();
+            MusicChanger.GetComponentInChildren<Text>().text = Songs[CurrentSong].name;
+    }
+    public void MusicRight()
+    {
+            CurrentSong++;
+            if (MusicChanger.transform.GetChild(1).GetComponent<Button>().interactable == false) MusicChanger.transform.GetChild(1).GetComponent<Button>().interactable = true;
+            if (CurrentSong == Songs.Length - 1)
+            {
+                MusicChanger.transform.GetChild(2).GetComponent<Button>().interactable = false;
+            }
+            Music.clip = Songs[CurrentSong];
+            Music.Play();
+            MusicChanger.GetComponentInChildren<Text>().text = Songs[CurrentSong].name;
     }
     #endregion
     IEnumerator WaitForSelection(float f)
@@ -303,7 +334,7 @@ public class GameManager : MonoBehaviour
         //bar1.SetUp(playerbases[1]);
         //bar1.SetUp(p1.GetComponent<PlayerBase>());
         //bar2.SetUp(p2.GetComponent<PlayerBase>());
-        print("Hello Sir");
+        //print("Hello Sir");
         
 
     }

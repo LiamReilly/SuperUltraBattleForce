@@ -1505,7 +1505,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f62fe212fd75cad47a80dad6378416ba, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2562,11 +2562,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7132696187509728040}
     m_Modifications:
-    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: m_Name
-      value: RHandBox
-      objectReference: {fileID: 0}
+      propertyPath: parentChar
+      value: 
+      objectReference: {fileID: 4797072526381733464}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2637,11 +2637,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: parentChar
-      value: 
-      objectReference: {fileID: 4797072526381733464}
+      propertyPath: m_Name
+      value: RHandBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bd0671eb56af04bb6aedb18911fc28, type: 3}
 --- !u!4 &576347773400684970 stripped
@@ -2669,11 +2669,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2815485867057094195}
     m_Modifications:
-    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: m_Name
-      value: LFootBox
-      objectReference: {fileID: 0}
+      propertyPath: parentChar
+      value: 
+      objectReference: {fileID: 4797072526381733464}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2729,11 +2729,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: parentChar
-      value: 
-      objectReference: {fileID: 4797072526381733464}
+      propertyPath: m_Name
+      value: LFootBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bd0671eb56af04bb6aedb18911fc28, type: 3}
 --- !u!114 &3416683599841812304 stripped
@@ -2761,11 +2761,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1770553285507286861}
     m_Modifications:
-    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: m_Name
-      value: RFootBox
-      objectReference: {fileID: 0}
+      propertyPath: parentChar
+      value: 
+      objectReference: {fileID: 4797072526381733464}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2821,11 +2821,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: parentChar
-      value: 
-      objectReference: {fileID: 4797072526381733464}
+      propertyPath: m_Name
+      value: RFootBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bd0671eb56af04bb6aedb18911fc28, type: 3}
 --- !u!114 &5770735669400435065 stripped
@@ -2853,11 +2853,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 394925159240052979}
     m_Modifications:
-    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: m_Name
-      value: LHandBox
-      objectReference: {fileID: 0}
+      propertyPath: parentChar
+      value: 
+      objectReference: {fileID: 4797072526381733464}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2928,11 +2928,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+    - target: {fileID: 7278618131950237982, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
-      propertyPath: parentChar
-      value: 
-      objectReference: {fileID: 4797072526381733464}
+      propertyPath: m_Name
+      value: LHandBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bd0671eb56af04bb6aedb18911fc28, type: 3}
 --- !u!114 &7010214791979660884 stripped
