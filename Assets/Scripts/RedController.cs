@@ -14,7 +14,7 @@ public class RedController : PlayerBase
         tauntCooldown = 4.45f;
         jabCooldown = 0.45f;
         quickKickCooldown = 0.6f;
-        takeHitCooldown = 0.3f;
+        takeHitCooldown = 0.5f;
 
         audioSource = GetComponent<AudioSource>();
         if (gameObject.transform.position.z < 0)

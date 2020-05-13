@@ -28,39 +28,80 @@ public class AIController : MonoBehaviour
             new SelectorShuffle(
                 SpaceHeavyPunch(), 
                 SpaceHeavyKick(),
+                SpaceLightKick(),
+                SpaceLightPunch(),
                 SpaceHadouken()
             )
         );
     }
 
-    protected Node SpaceHeavyPunch(){
-        return new Race(
+    protected NodeWeight SpaceLightPunch(){
+        return new NodeWeight(50f,
+            new Race(
+                new LeafWait(4000),
+                new Sequence(
+                    KeepSpacing(1),
+                    new LeafInvoke(() =>
+                    {
+                        player.Jab();
+                    }),
+                    new LeafWait(100)
+                )
+            )
+        );
+    }
+
+    protected NodeWeight SpaceLightKick(){
+        return new NodeWeight(40f,
+            new Race(
+                new LeafWait(4000),
+                new Sequence(
+                    KeepSpacing(1),
+                    new LeafInvoke(() =>
+                    {
+                        player.QuickKick();
+                    }),
+                    new LeafWait(100)
+                )
+            )
+        );
+    }
+
+    protected NodeWeight SpaceHeavyPunch(){
+        return new NodeWeight(10f,
+            new Race(
                 new LeafWait(4000),
                 new Sequence(
                     KeepSpacing(1),
                     new LeafInvoke(() =>
                     {
                         player.Punch();
-                    })
+                    }),
+                    new LeafWait(300)
                 )
+            )   
         );
     }
 
-    protected Node SpaceHeavyKick(){
-        return new Race(
+    protected NodeWeight SpaceHeavyKick(){
+        return new NodeWeight(10f,
+            new Race(
                 new LeafWait(4000),
                 new Sequence(
                     KeepSpacing(1.5f),
                     new LeafInvoke(() =>
                     {
                         player.RoundHouse();
-                    })
+                    }),
+                    new LeafWait(300)
                 )
+            )
         );
     }
 
-    protected Node SpaceHadouken(){
-        return new Race(
+    protected NodeWeight SpaceHadouken(){
+        return new NodeWeight(10f,
+            new Race(
                 new LeafWait(4000),
                 new Sequence(
                     new LeafAssert(() => player.specialReady()),
@@ -68,8 +109,10 @@ public class AIController : MonoBehaviour
                     new LeafInvoke(() =>
                     {
                         player.Hadouken();
-                    })
+                    }),
+                    new LeafWait(300)
                 )
+            )
         );
     }
 

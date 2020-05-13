@@ -75,59 +75,82 @@ public abstract class PlayerBase : MonoBehaviour
 
     public void RoundHouse()
     {
-        CannotAttack = true;
-        setHitboxes(MoveTable.move.sK);
-        anim.SetTrigger("RoundHouse");
-        StartCoroutine(waitforattack(kickCooldown));
+        if (!CannotAttack)
+        {
+            CannotAttack = true;
+            setHitboxes(MoveTable.move.sK);
+            anim.SetTrigger("RoundHouse");
+            StartCoroutine(waitforattack(kickCooldown));
+        }
     }
     public void Jump()
     {
-        CannotAttack = true;
-        anim.SetTrigger("Jump");
-        StartCoroutine(waitforattack(jumpCooldown));
+        if (!CannotAttack)
+        {
+            CannotAttack = true;
+            anim.SetTrigger("Jump");
+            StartCoroutine(waitforattack(jumpCooldown));
+        }
     }
     public void Punch()
     {
-        CannotAttack = true;
-        setHitboxes(MoveTable.move.sP);
-        anim.SetTrigger("Punch");
-        StartCoroutine(waitforattack(punchCooldown));
+        if (!CannotAttack)
+        {
+            CannotAttack = true;
+            setHitboxes(MoveTable.move.sP);
+            anim.SetTrigger("Punch");
+            StartCoroutine(waitforattack(punchCooldown));
+        }
     }
     public void Taunt()
     {
-        CannotAttack = true;
-        anim.SetTrigger("Taunt");
-        StartCoroutine(waitforattack(tauntCooldown));
+        if (!CannotAttack)
+        {
+            CannotAttack = true;
+            anim.SetTrigger("Taunt");
+            StartCoroutine(waitforattack(tauntCooldown));
+        }
     }
     public void Hadouken()
     {
-        if(specialBar.isFull()){
+        if (!CannotAttack && specialBar.isFull())
+        {
             CannotAttack = true;
             anim.SetTrigger("Hadouken");
             StartCoroutine(waitforHadouken(0.9f));
             specialBar.ResetLevel();
             StartCoroutine(waitforattack(hadoukenCooldown));
         }
+
     }
     public void Jab()
     {
-        CannotAttack = true;
-        setHitboxes(MoveTable.move.wP);
-        anim.SetTrigger("Jab");
-        StartCoroutine(waitforattack(jabCooldown));
+        if (!CannotAttack)
+        {
+            CannotAttack = true;
+            setHitboxes(MoveTable.move.wP);
+            anim.SetTrigger("Jab");
+            StartCoroutine(waitforattack(jabCooldown));
+        }
     }
     public void QuickKick()
     {
-        CannotAttack = true;
-        setHitboxes(MoveTable.move.wK);
-        anim.SetTrigger("QuickKick");
-        StartCoroutine(waitforattack(quickKickCooldown));
+        if (!CannotAttack)
+        {
+            CannotAttack = true;
+            setHitboxes(MoveTable.move.wK);
+            anim.SetTrigger("QuickKick");
+            StartCoroutine(waitforattack(quickKickCooldown));
+        }
     }
     public void Block()
     {
-        CannotAttack = true;
-        Blocking = true;
-        anim.SetBool("Blocking", true);
+        if (!CannotAttack)
+        {
+            CannotAttack = true;
+            Blocking = true;
+            anim.SetBool("Blocking", true);
+        }
     }
     public void UnBlock()
     {
