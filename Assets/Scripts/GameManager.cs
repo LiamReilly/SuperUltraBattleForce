@@ -420,7 +420,7 @@ public class GameManager : MonoBehaviour
                 RoundReset();
             }
         }
-        if (bar1.GetComponent<HealthBar>().GetValue() < bar2.GetComponent<HealthBar>().GetValue())
+        else if (bar1.GetComponent<HealthBar>().GetValue() < bar2.GetComponent<HealthBar>().GetValue())
         {
             var result = Rounds[1].IncreaseRoundCount();
             print("p2 won round");
@@ -437,7 +437,7 @@ public class GameManager : MonoBehaviour
                 RoundReset();
             }
         }
-        if (PickedPlayers[0].GetComponent<PlayerBase>().currHealth == PickedPlayers[1].GetComponent<PlayerBase>().currHealth)
+        else if (PickedPlayers[0].GetComponent<PlayerBase>().currHealth == PickedPlayers[1].GetComponent<PlayerBase>().currHealth)
         {
             //figure out what to do for ties
             print("tie lul figure it out");

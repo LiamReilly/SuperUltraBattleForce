@@ -32,7 +32,7 @@ public class RedController : PlayerBase
         maxHealth = 100;
         characterName = "Red Girl";
         baseAttack = 1;
-        Speed = 2;
+        Speed = 3;
         color = "Red";
         //Projectile = (GameObject)Resources.Load("Prefab/BlueHadouken", typeof(GameObject));
     }
@@ -118,6 +118,18 @@ public class RedController : PlayerBase
                 DamagePlayer(10);
             }
 
+        }else{
+            //Debug code, breaks AI so only uncomment if you need it
+            // if(Input.GetKey(KeyCode.Z)){
+            //     moveForward();
+            // }else if(Input.GetKey(KeyCode.X)){
+            //     moveBackward();
+            // }else{
+            //     stopMoving();
+            // }
+
+
+            handleAIMovement();
         }
     }
 

@@ -120,7 +120,16 @@ public class BlueController : PlayerBase
                 DamagePlayer(10);
             }
         }else{
-            
+            //Debug code, breaks AI so only uncomment if you need it
+            // if(Input.GetKey(KeyCode.Comma)){
+            //     moveForward();
+            // }else if(Input.GetKey(KeyCode.Period)){
+            //     moveBackward();
+            // }else{
+            //     stopMoving();
+            // }
+
+            handleAIMovement();
         }
     }
 

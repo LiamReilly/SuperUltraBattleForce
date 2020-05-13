@@ -20,12 +20,15 @@ public abstract class PlayerBase : MonoBehaviour
 
     public bool isAI = false;
     public AIController aIController;
+    protected bool willMoveForward;
+    protected bool willMoveBackward;
 
     public bool isTraining = false;
 
     protected Vector3 CharSpeed;
     protected Animator anim;
     protected bool CannotAttack;
+    protected bool Blocking = false;
     protected bool move;
 
     public Hitbox LHand, LFoot, RHand, RFoot;
@@ -49,42 +52,25 @@ public abstract class PlayerBase : MonoBehaviour
 
     public void moveForward(){
         if(!CannotAttack){
-            float horz = 0;
-
-            if(isFacingRight){
-                horz = -1;
-            }else{
-                horz = 1;
-            }
-
-            horz = horz * Time.deltaTime * Speed;
-
-            move = true;
-            anim.SetBool("Move", move);
-            anim.SetFloat("Velocity", horz/Time.deltaTime);
-            CharSpeed = new Vector3(0f, 0f, horz);
-            moveCharacter(CharSpeed);
+            willMoveForward = true;
+            willMoveBackward = false;
+        }else{
+            Debug.Log(gameObject.name + " on cooldown");
         }
     }
 
     public void moveBackward(){
         if(!CannotAttack){
-            float horz = 0;
-
-            if(isFacingRight){
-                horz = Speed;
-            }else{
-                horz = -Speed;
-            }
-
-            horz = horz * Time.deltaTime * Speed;
-
-            move = true;
-            anim.SetBool("Move", move);
-            anim.SetFloat("Velocity", horz/Time.deltaTime);
-            CharSpeed = new Vector3(0f, 0f, horz);
-            moveCharacter(CharSpeed);
+            willMoveBackward = true;
+            willMoveForward = false;
+        }else{
+            Debug.Log(gameObject.name + " on cooldown");
         }
+    }
+
+    public void stopMoving(){
+        willMoveForward = false;
+        willMoveBackward = false;
     }
 
     public void RoundHouse()
@@ -140,11 +126,13 @@ public abstract class PlayerBase : MonoBehaviour
     public void Block()
     {
         CannotAttack = true;
+        Blocking = true;
         anim.SetBool("Blocking", true);
     }
     public void UnBlock()
     {
         CannotAttack = false;
+        Blocking = false;
         anim.SetBool("Blocking", false);
     }
     public void TakeHit()
@@ -182,7 +170,7 @@ public abstract class PlayerBase : MonoBehaviour
     {
         // reduce damage if blocking
         // multiply by 0.2 = take 80% less damage
-        if (CannotAttack)
+        if (Blocking)
             damage *= 0.2f;
 
         currHealth -= damage;
@@ -204,11 +192,11 @@ public abstract class PlayerBase : MonoBehaviour
         // its debatable if we want to change knockback if you're blocking
         // if we do want to, edit the multiplier here
 
-        if (CannotAttack)
+        if (Blocking){
             force *= 1.0f;
-
-
-        TakeHit();
+        }else{
+            TakeHit();
+        }
         if(isFacingRight){
             force *= -1;
         }
@@ -225,6 +213,59 @@ public abstract class PlayerBase : MonoBehaviour
 
     public bool specialReady(){
         return specialBar.isFull();
+    }
+
+    protected void handleAIMovement()
+    {
+        float horz = 0;
+
+        if (willMoveForward)
+        {
+            if (isFacingRight)
+            {
+                horz = 1;
+            }
+            else
+            {
+                horz = 1;
+            }
+            // willMoveForward = false;
+        }
+        if (willMoveBackward)
+        {
+            if (isFacingRight)
+            {
+                horz = -1;
+            }
+            else
+            {
+                horz = -1;
+            }
+            // willMoveBackward = false;
+        }
+
+        if(willMoveForward == willMoveBackward){
+            horz = 0;
+            Debug.Log("Both move forward and backward have been set");
+        }
+
+        horz = horz * Time.deltaTime * Speed;
+
+        if (horz != 0)
+        {
+            move = true;
+        }
+        else
+        {
+            move = false;
+        }
+
+        anim.SetBool("Move", move);
+        if (horz > 0) anim.SetFloat("Velocity", Speed);
+        if (horz < 0) anim.SetFloat("Velocity", -Speed);
+        CharSpeed = new Vector3(0f, 0f, horz);
+        moveCharacter(CharSpeed);
+
     }
 
 }

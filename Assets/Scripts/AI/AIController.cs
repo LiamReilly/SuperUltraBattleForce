@@ -7,7 +7,7 @@ using TreeSharpPlus;
 public class AIController : MonoBehaviour
 {
 
-    const float DISTANCE_THRESHOLD = 2f;
+    const float DISTANCE_THRESHOLD = 1f;
 
     private BehaviorAgent behaviorAgent;
     public PlayerBase player;
@@ -25,44 +25,87 @@ public class AIController : MonoBehaviour
 
     protected Node BuildTreeRoot(){
         return new DecoratorLoop(
-            new Sequence(
-                KeepSpacing(2),
-                new LeafInvoke(() =>
-                {
-                    player.Punch();
-                })
+            new SelectorShuffle(
+                SpaceHeavyPunch(), 
+                SpaceHeavyKick(),
+                SpaceHadouken()
             )
         );
     }
 
+    protected Node SpaceHeavyPunch(){
+        return new Sequence(
+                    KeepSpacing(1),
+                    new LeafInvoke(() =>
+                    {
+                        player.Punch();
+                    })
+                );
+    }
+
+    protected Node SpaceHeavyKick(){
+        return new Sequence(
+                    KeepSpacing(2f),
+                    new LeafInvoke(() =>
+                    {
+                        player.RoundHouse();
+                    })
+                );
+    }
+
+    protected Node SpaceHadouken(){
+        return new Sequence(
+                    // new LeafAssert(() => player.specialReady()),
+                    KeepSpacing(8),
+                    new LeafInvoke(() =>
+                    {
+                        player.Hadouken();
+                    })
+                );
+    }
+
     protected Node KeepSpacing(float dist){
-        return new WaitFor(
-            new LeafInvoke(() => CloseDistance(dist))
+        return new Sequence(
+            new WaitFor(
+                new LeafInvoke(
+                    () => CloseDistance(dist),
+                    () => player.stopMoving()
+                )
+            )
         );
     }
 
     protected RunStatus CloseDistance(float dist){
 
-        if (Mathf.Abs(player.transform.position.z - opponent.transform.position.z) - dist < DISTANCE_THRESHOLD)
+        if (IsInThreshold(dist))
         {
-            Debug.Log("Made it to destination");
+            Debug.Log(player.name + " Made it to destination, " + DistanceBetweenPlayers());
             return RunStatus.Success;
         }
 
-        if (Mathf.Abs(player.transform.position.z - opponent.transform.position.z) > dist)
+        if (DistanceBetweenPlayers() > dist)
         {
-            Debug.Log("Moving forward");
+            // Debug.Log(player.name + " Moving forward, " + DistanceBetweenPlayers() + ", " + dist);
             player.moveForward();
             return RunStatus.Running;
         }
-        else if (Mathf.Abs(player.transform.position.z - opponent.transform.position.z) < dist)
+        else if (DistanceBetweenPlayers() < dist)
         {
+            // Debug.Log(player.name + " Moving backward, " + DistanceBetweenPlayers() + ", " + dist);
             player.moveBackward();
             return RunStatus.Running;
         }
 
         return RunStatus.Failure;
 
+    }
+
+    protected bool IsInThreshold(float dist){
+        return Mathf.Abs(DistanceBetweenPlayers() - dist) < DISTANCE_THRESHOLD;
+    }
+
+    protected float DistanceBetweenPlayers(){
+        return Mathf.Abs(player.transform.position.z - opponent.transform.position.z);
     }
 
     void OnDestroy(){

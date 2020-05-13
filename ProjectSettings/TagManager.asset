@@ -11,6 +11,7 @@ TagManager:
   - excess
   - Bar1
   - Bar2
+  - Hadouken
   layers:
   - Default
   - TransparentFX

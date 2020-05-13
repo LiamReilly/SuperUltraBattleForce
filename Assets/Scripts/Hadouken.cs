@@ -41,17 +41,29 @@ public class Hadouken : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.gameObject.CompareTag("Player")|| collision.gameObject.CompareTag("Player2")){
+        if (collision.gameObject.CompareTag("Player"))
+        {
             PlayerBase playerRef = collision.gameObject.GetComponent<PlayerBase>();
-            if(playerRef != owner&&!hit){
-                playerRef.DamagePlayer(10f*owner.baseAttack);
+            if (playerRef != owner && !hit)
+            {
+                playerRef.DamagePlayer(10f * owner.baseAttack);
                 hit = true;
+
+                mesh.enabled = false;
+                explosion.Play();
+                Audio.Play();
+                StartCoroutine(DestroyHadouken());
+
             }
         }
-        mesh.enabled = false;
-        explosion.Play();
-        Audio.Play();
-        StartCoroutine(DestroyHadouken());
+        else if (collision.gameObject.CompareTag("Hadouken"))
+        {
+            mesh.enabled = false;
+            explosion.Play();
+            Audio.Play();
+            StartCoroutine(DestroyHadouken());
+
+        }
     }
     IEnumerator DestroyHadouken()
     {
