@@ -137,9 +137,10 @@ public abstract class PlayerBase : MonoBehaviour
 
     public void DamagePlayer(float damage)
     {
-        //reduce damage if blocking
+        // reduce damage if blocking
+        // multiply by 0.2 = take 80% less damage
         if (CannotAttack)
-            damage *= 0.5f;
+            damage *= 0.2f;
 
         currHealth -= damage;
 
