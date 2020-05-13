@@ -32,5 +32,9 @@ public class SpecialBar : MonoBehaviour
     {
         specialBar.value += power;
     }
+
+    public bool isFull(){
+        return specialBar.value >= 100f;
+    }
     
 }

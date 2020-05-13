@@ -168,4 +168,8 @@ public abstract class PlayerBase : MonoBehaviour
         RFoot.set(MoveTable.use(m, color, MoveTable.hitbox.rf));
     }
 
+    public bool specialReady(){
+        return specialBar.isFull();
+    }
+
 }
