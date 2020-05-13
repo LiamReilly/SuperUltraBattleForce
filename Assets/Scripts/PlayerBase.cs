@@ -38,11 +38,16 @@ public abstract class PlayerBase : MonoBehaviour
     public abstract void TakeHit();
     protected abstract IEnumerator waitforattack(float f);
     protected abstract IEnumerator waitforHadouken(float f);
-
+ 
     public void DamagePlayer(float damage)
     {
         currHealth -= damage;
 
         healthBar.SetHealth(currHealth);
+    }
+
+    public void KnockbackPlayer(float force)
+    {
+        // ???
     }
 }
