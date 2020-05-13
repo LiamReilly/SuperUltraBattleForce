@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class BlueController : PlayerBase
 {
-    public new float JumpCooldown = 1f;
-    public new float KickCooldown = 0.9f;
-    public new float PunchCooldown = 0.8f;
-    public new float HadoukenCooldown = 0.9f;
-    public new float TauntCooldown = 2.7f;
-    public new float JabCooldown = 0.45f;
-    public new float QuickKickCooldown = 0.6f;
-    public new float TakeHitCooldown = 0.3f;
-
     // Start is called before the first frame update
     void Start()
     {
+        jumpCooldown = 1f;
+        kickCooldown = 0.9f;
+        punchCooldown = 0.8f;
+        hadoukenCooldown = 0.9f;
+        tauntCooldown = 2.7f;
+        jabCooldown = 0.45f;
+        quickKickCooldown = 0.6f;
+        takeHitCooldown = 0.3f;
+
         audioSource = GetComponent<AudioSource>();
         if (gameObject.transform.position.z < 0)
         {

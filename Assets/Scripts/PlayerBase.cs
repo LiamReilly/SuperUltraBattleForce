@@ -31,14 +31,15 @@ public abstract class PlayerBase : MonoBehaviour
     public Hitbox LHand, LFoot, RHand, RFoot;
     protected string color;
 
-    public float JumpCooldown = 1f;
-    public float KickCooldown = 0.9f;
-    public float PunchCooldown = 0.8f;
-    public float HadoukenCooldown = 0.9f;
-    public float TauntCooldown = 2.7f;
-    public float JabCooldown = 0.45f;
-    public float QuickKickCooldown = 0.6f;
-    public float TakeHitCooldown = 0.3f;
+    public float jumpCooldown;
+    public float kickCooldown;
+    public float punchCooldown;
+    public float hadoukenCooldown;
+    public float tauntCooldown;
+    public float jabCooldown;
+    public float quickKickCooldown;
+    public float takeHitCooldown;
+
 
 
     public void moveCharacter(Vector3 amount)
@@ -50,26 +51,26 @@ public abstract class PlayerBase : MonoBehaviour
         CannotAttack = true;
         setHitboxes(MoveTable.move.sK);
         anim.SetTrigger("RoundHouse");
-        StartCoroutine(waitforattack(KickCooldown));
+        StartCoroutine(waitforattack(kickCooldown));
     }
     public void Jump()
     {
         CannotAttack = true;
         anim.SetTrigger("Jump");
-        StartCoroutine(waitforattack(JumpCooldown));
+        StartCoroutine(waitforattack(jumpCooldown));
     }
     public void Punch()
     {
         CannotAttack = true;
         setHitboxes(MoveTable.move.sP);
         anim.SetTrigger("Punch");
-        StartCoroutine(waitforattack(PunchCooldown));
+        StartCoroutine(waitforattack(punchCooldown));
     }
     public void Taunt()
     {
         CannotAttack = true;
         anim.SetTrigger("Taunt");
-        StartCoroutine(waitforattack(TauntCooldown));
+        StartCoroutine(waitforattack(tauntCooldown));
     }
     public void Hadouken()
     {
@@ -77,21 +78,21 @@ public abstract class PlayerBase : MonoBehaviour
         anim.SetTrigger("Hadouken");
         StartCoroutine(waitforHadouken(0.9f));
         specialBar.AddLevel(-100);
-        StartCoroutine(waitforattack(HadoukenCooldown));
+        StartCoroutine(waitforattack(hadoukenCooldown));
     }
     public void Jab()
     {
         CannotAttack = true;
         setHitboxes(MoveTable.move.wP);
         anim.SetTrigger("Jab");
-        StartCoroutine(waitforattack(JabCooldown));
+        StartCoroutine(waitforattack(jabCooldown));
     }
     public void QuickKick()
     {
         CannotAttack = true;
         setHitboxes(MoveTable.move.wK);
         anim.SetTrigger("QuickKick");
-        StartCoroutine(waitforattack(QuickKickCooldown));
+        StartCoroutine(waitforattack(quickKickCooldown));
     }
     public void Block()
     {
@@ -107,7 +108,7 @@ public abstract class PlayerBase : MonoBehaviour
     {
         CannotAttack = true;
         anim.SetTrigger("TakeHit");
-        StartCoroutine(waitforattack(TakeHitCooldown));
+        StartCoroutine(waitforattack(takeHitCooldown));
     }
     protected IEnumerator waitforattack(float f)
     {
