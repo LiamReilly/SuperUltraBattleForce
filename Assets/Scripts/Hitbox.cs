@@ -7,22 +7,34 @@ public class Hitbox : MonoBehaviour {
     //
     public GameObject parentChar;
 
-    private float damage;
-    public int scale = 2;
+    private float damage, knockback;
+    public int scale = 1;
 
     public void Start()
     {
-        damage = 10f;
+        transform.localScale *= scale;
+        damage = 0f;
+        knockback = 0f;
+    }
+    
+    public void set(float d)
+    {
+        set(d, d);
     }
 
-    public void setDamage(float f)
+    public void set(float d, float k)
     {
-        damage = f;
+        if(d > 0) Debug.Log("Set damage to " + d);
+
+        damage = d;
+        knockback = k;
     }
 
     public void Reset()
     {
+        Debug.Log("reset");
         damage = 0f;
+        knockback = 0f;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -33,11 +45,18 @@ public class Hitbox : MonoBehaviour {
         if (other.gameObject.Equals(parentChar))
             return;
 
+        if (damage == 0)
+            return;
+
         PlayerBase otherChar = other.gameObject.GetComponent<PlayerBase>();
 
-        otherChar.DamagePlayer(damage);
-        Reset();
+        if (damage > 0)
+            Debug.Log("Should have done damage?");
+        else
+            Debug.Log("Collided with 0 damage?");
 
-        Debug.Log("Collision?");
+        otherChar.DamagePlayer(damage);
+        otherChar.KnockbackPlayer(knockback);
+        Reset();
     }
 }

@@ -33,6 +33,7 @@ public class RedController : PlayerBase
         characterName = "Red Girl";
         baseAttack = 1;
         Speed = 2;
+        color = "Red";
         //Projectile = (GameObject)Resources.Load("Prefab/BlueHadouken", typeof(GameObject));
     }
 
@@ -128,67 +129,7 @@ public class RedController : PlayerBase
 
 
     }
-    public override void moveCharacter(Vector3 amount)
-    {
-        gameObject.transform.Translate(amount);
-    }
-    public override void RoundHouse()
-    {
-        Attacking = true;
-        anim.SetTrigger("RoundHouse");
-    }
-    public override void Jump()
-    {
-        Attacking = true;
-        anim.SetTrigger("Jump");
-    }
-    public override void Punch()
-    {
-        Attacking = true;
-        anim.SetTrigger("Punch");
-    }
-    public override void Taunt()
-    {
-        Attacking = true;
-        anim.SetTrigger("Taunt");
-    }
-    public override void Hadouken()
-    {
-        Attacking = true;
-        anim.SetTrigger("Hadouken");
-        StartCoroutine(waitforHadouken(0.9f));
-    }
-    public override void Jab()
-    {
-        Attacking = true;
-        anim.SetTrigger("Jab");
-    }
-    public override void QuickKick()
-    {
-        Attacking = true;
-        anim.SetTrigger("QuickKick");
-    }
-    public override void Block()
-    {
-        Attacking = true;
-        anim.SetBool("Blocking", true);
-    }
-    public override void UnBlock()
-    {
-        Attacking = false;
-        anim.SetBool("Blocking", false);
-    }
-    public override void TakeHit()
-    {
-        Attacking = true;
-        anim.SetTrigger("TakeHit");
-    }
-    protected override IEnumerator waitforattack(float f)
-    {
-        yield return new WaitForSeconds(f);
-        Attacking = false;
 
-    }
     protected override IEnumerator waitforHadouken(float f)
     {
         yield return new WaitForSeconds(f);
@@ -199,7 +140,6 @@ public class RedController : PlayerBase
             h.Initialize(-Vector3.forward, this);
         }
     }
-
 }
 
 
