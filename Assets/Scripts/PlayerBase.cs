@@ -162,10 +162,10 @@ public abstract class PlayerBase : MonoBehaviour
 
     protected void setHitboxes(MoveTable.move m)
     {
-        LHand.set(MoveTable.use(m, color, MoveTable.hitbox.lh));
-        RHand.set(MoveTable.use(m, color, MoveTable.hitbox.rh));
-        LFoot.set(MoveTable.use(m, color, MoveTable.hitbox.lf));
-        RFoot.set(MoveTable.use(m, color, MoveTable.hitbox.rf));
+        LHand.set(baseAttack * MoveTable.use(m, color, MoveTable.hitbox.lh));
+        RHand.set(baseAttack * MoveTable.use(m, color, MoveTable.hitbox.rh));
+        LFoot.set(baseAttack * MoveTable.use(m, color, MoveTable.hitbox.lf));
+        RFoot.set(baseAttack * MoveTable.use(m, color, MoveTable.hitbox.rf));
     }
 
     public bool specialReady(){
