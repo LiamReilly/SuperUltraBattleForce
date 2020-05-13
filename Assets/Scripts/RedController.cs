@@ -197,6 +197,8 @@ public class RedController : PlayerBase
         }else{
             h.Initialize(-Vector3.forward, this);
         }
+
+        audioSource.PlayOneShot(hadouken, 0.1f);
     }
 
 }

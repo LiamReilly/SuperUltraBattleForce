@@ -1453,8 +1453,10 @@ MonoBehaviour:
   Songs:
   - {fileID: 8300000, guid: 18317153b00124e45b368af2872ca557, type: 3}
   - {fileID: 8300000, guid: 4850d2fe2a21e654290f65757e6cee37, type: 3}
-  - {fileID: 8300000, guid: 9b1619173afef074982b9798aa69d458, type: 3}
   - {fileID: 8300000, guid: bf930e108c2abd54bb83dd699f0a55e7, type: 3}
+  - {fileID: 8300000, guid: 45403359edf954d46b469e6822fffd6f, type: 3}
+  - {fileID: 8300000, guid: 9bfe7a6e953c2d349a73d8021e0cf074, type: 3}
+  - {fileID: 8300000, guid: 9b1619173afef074982b9798aa69d458, type: 3}
 --- !u!82 &358146985
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1469,7 +1471,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

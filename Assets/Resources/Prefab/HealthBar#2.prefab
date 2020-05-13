@@ -100,12 +100,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4857385823160870840}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45f566f97b0a82e4191be63652984d62, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b88a2d69772f544aa5e6c45ec29352f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 4857385823160870843}
   playerHealth: {fileID: 0}
-  player: {fileID: 0}
 --- !u!1 &4857385824077272765
 GameObject:
   m_ObjectHideFlags: 0
