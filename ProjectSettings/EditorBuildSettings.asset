@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dojo.unity
     guid: 8ba4dc3673828164ca29cc1b4bec8175
+  - enabled: 1
+    path: Assets/Scenes/Airport.unity
+    guid: 46901716d1f93c848867075684c14da9
   m_configObjects: {}

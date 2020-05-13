@@ -304,7 +304,8 @@ public class GameManager : MonoBehaviour
     public void Stage1()
     {
         Button.Play();
-        print("this doesn't do anything yet");
+        StageSelect.SetActive(false);
+        LoadLevel("Airport");
     }
     public void Dojolevel()
     {
