@@ -17,6 +17,9 @@ public abstract class PlayerBase : MonoBehaviour
     public AudioClip hadouken;
     public AudioClip punch;
 
+    public bool isAI = false;
+    public AIController aIController;
+
     protected Vector3 CharSpeed;
     protected Animator anim;
     protected bool Attacking;

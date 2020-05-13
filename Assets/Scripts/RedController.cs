@@ -48,7 +48,7 @@ public class RedController : PlayerBase
         {
             horz = 1;
         }
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.A) == Input.GetKey(KeyCode.D))
         {
             horz = 0;
         }
