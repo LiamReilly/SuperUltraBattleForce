@@ -12,6 +12,7 @@ public abstract class PlayerBase : MonoBehaviour
     public float Speed;
     public GameObject Projectile;
     public HealthBar healthBar;
+    public SpecialBar specialBar;
     public bool isFacingRight;
     public AudioSource audioSource;
     public AudioClip hadouken;
@@ -47,6 +48,11 @@ public abstract class PlayerBase : MonoBehaviour
         currHealth -= damage;
 
         healthBar.SetHealth(currHealth);
+    }
+    public void IncreaseSpecial(float damage)
+    {
+
+        specialBar.SetLevel(damage);
     }
 
     public void KnockbackPlayer(float force)

@@ -99,9 +99,10 @@ public class RedController : PlayerBase
                 Taunt();
                 StartCoroutine(waitforattack(TauntCooldown));
             }
-            if (Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.O) && specialBar.FindLevel() == 100f)
             {
                 Hadouken();
+                specialBar.SetLevel(-100);
                 StartCoroutine(waitforattack(HadoukenCooldown));
             }
             if (Input.GetKeyDown(KeyCode.L))

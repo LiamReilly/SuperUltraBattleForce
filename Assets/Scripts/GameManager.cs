@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     private GameObject MusicChanger;
     public AudioClip[] Songs;
     private int CurrentSong;
+    public GameObject[] Specialbars;
     
     // Start is called before the first frame update
     void Awake()
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour
         {
             startButtons.SetActive(true);
             Health.SetActive(false);
+            Specialbars[0].SetActive(false);
         }
         timer = GameObject.Find("Timer").GetComponent<Text>();
         PauseItems = GameObject.Find("PauseItems");
@@ -330,17 +332,20 @@ public class GameManager : MonoBehaviour
         placeholder2.SetParent(p2.transform);
         Destroy(Players);
         Health.SetActive(true);
+        Specialbars[0].SetActive(true);
         //var playerbases  = p1.GetComponents<PlayerBase>();
         p2.tag = "Player2";
         //playerbases[1].healthBar = bar1;
         p1.GetComponent<PlayerBase>().healthBar = bar1;
         p2.GetComponent<PlayerBase>().healthBar = bar2;
+        p1.GetComponent<PlayerBase>().specialBar = Specialbars[1].GetComponent<SpecialBar>();
+        p2.GetComponent<PlayerBase>().specialBar = Specialbars[2].GetComponent<SpecialBar>();
         //bar1.SetUp(playerbases[1]);
         //bar1.SetUp(p1.GetComponent<PlayerBase>());
         //bar2.SetUp(p2.GetComponent<PlayerBase>());
         //print("Hello Sir");
 
-        if(gameType == GameType.CPUMODE){
+        if (gameType == GameType.CPUMODE){
             AIController ai1 = p1.AddComponent<AIController>();
             AIController ai2 = p2.AddComponent<AIController>();
 
