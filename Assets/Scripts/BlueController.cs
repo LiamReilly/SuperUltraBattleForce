@@ -33,6 +33,7 @@ public class BlueController : PlayerBase
         characterName = "Blue Guy";
         baseAttack = 1.3f;
         Speed = 1.7f;
+        color = "Blue";
         //Projectile = (GameObject)Resources.Load("Prefab/RedHadouken", typeof(GameObject));
 
     }
@@ -98,9 +99,10 @@ public class BlueController : PlayerBase
                 Taunt();
                 StartCoroutine(waitforattack(TauntCooldown));
             }
-            if (Input.GetKeyDown(KeyCode.Keypad6))
+            if (Input.GetKeyDown(KeyCode.Keypad6)&&specialBar.FindLevel()==100f)
             {
                 Hadouken();
+                specialBar.SetLevel(-100);
                 StartCoroutine(waitforattack(HadoukenCooldown));
             }
             if (Input.GetKeyDown(KeyCode.Keypad3))
@@ -128,68 +130,7 @@ public class BlueController : PlayerBase
 
 
     }
-    public override void moveCharacter(Vector3 amount)
-    {
-        gameObject.transform.Translate(amount);
-    }
-    public override void RoundHouse()
-    {
-        Attacking = true;
-        anim.SetTrigger("RoundHouse");
-    }
-    public override void Jump()
-    {
-        Attacking = true;
-        anim.SetTrigger("Jump");
-    }
-    public override void Punch()
-    {
-        Attacking = true;
-        anim.SetTrigger("Punch");
-        //audioSource.PlayOneShot(punch, 0.1f);
-    }
-    public override void Taunt()
-    {
-        Attacking = true;
-        anim.SetTrigger("Taunt");
-    }
-    public override void Hadouken()
-    {
-        Attacking = true;
-        anim.SetTrigger("Hadouken");
-        StartCoroutine(waitforHadouken(0.9f));
-    }
-    public override void Jab()
-    {
-        Attacking = true;
-        anim.SetTrigger("Jab");
-    }
-    public override void QuickKick()
-    {
-        Attacking = true;
-        anim.SetTrigger("QuickKick");
-    }
-    public override void Block()
-    {
-        Attacking = true;
-        anim.SetBool("Blocking", true);
-    }
-    public override void UnBlock()
-    {
-        Attacking = false;
-        anim.SetBool("Blocking", false);
-    }
-    public override void TakeHit()
-    {
-        Attacking = true;
-        anim.SetTrigger("TakeHit");
-    }
-    protected override IEnumerator waitforattack(float f)
-    {
-        yield return new WaitForSeconds(f);
-        Attacking = false;
 
-    }
     protected override IEnumerator waitforHadouken(float f)
     {
         yield return new WaitForSeconds(f);

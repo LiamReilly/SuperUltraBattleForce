@@ -12,6 +12,7 @@ public abstract class PlayerBase : MonoBehaviour
     public float Speed;
     public GameObject Projectile;
     public HealthBar healthBar;
+    public SpecialBar specialBar;
     public bool isFacingRight;
     public AudioSource audioSource;
     public AudioClip hadouken;
@@ -26,20 +27,77 @@ public abstract class PlayerBase : MonoBehaviour
     protected bool move;
 
     public Hitbox LHand, LFoot, RHand, RFoot;
+    protected string color;
 
 
-    public abstract void moveCharacter(Vector3 amount);
-    public abstract void RoundHouse();
-    public abstract void QuickKick();
-    public abstract void Jump();
-    public abstract void Jab();
-    public abstract void Punch();
-    public abstract void Taunt();
-    public abstract void Hadouken();
-    public abstract void Block();
-    public abstract void UnBlock();
-    public abstract void TakeHit();
-    protected abstract IEnumerator waitforattack(float f);
+    public void moveCharacter(Vector3 amount)
+    {
+        gameObject.transform.Translate(amount);
+    }
+    public void RoundHouse()
+    {
+        Attacking = true;
+        setHitboxes(MoveTable.move.sK);
+        anim.SetTrigger("RoundHouse");
+    }
+    public void Jump()
+    {
+        Attacking = true;
+        anim.SetTrigger("Jump");
+    }
+    public void Punch()
+    {
+        Attacking = true;
+        setHitboxes(MoveTable.move.sP);
+        anim.SetTrigger("Punch");
+    }
+    public void Taunt()
+    {
+        Attacking = true;
+        anim.SetTrigger("Taunt");
+    }
+    public void Hadouken()
+    {
+        Attacking = true;
+        anim.SetTrigger("Hadouken");
+        StartCoroutine(waitforHadouken(0.9f));
+    }
+    public void Jab()
+    {
+        Attacking = true;
+        setHitboxes(MoveTable.move.wP);
+        anim.SetTrigger("Jab");
+    }
+    public void QuickKick()
+    {
+        Attacking = true;
+        setHitboxes(MoveTable.move.wK);
+        anim.SetTrigger("QuickKick");
+    }
+    public void Block()
+    {
+        Attacking = true;
+        anim.SetBool("Blocking", true);
+    }
+    public void UnBlock()
+    {
+        Attacking = false;
+        anim.SetBool("Blocking", false);
+    }
+    public void TakeHit()
+    {
+        Attacking = true;
+        anim.SetTrigger("TakeHit");
+    }
+    protected IEnumerator waitforattack(float f)
+    {
+        yield return new WaitForSeconds(f);
+        Attacking = false;
+        LHand.Reset();
+        RHand.Reset();
+        LFoot.Reset();
+        RFoot.Reset();
+    }
     protected abstract IEnumerator waitforHadouken(float f);
  
     public void DamagePlayer(float damage)
@@ -48,9 +106,22 @@ public abstract class PlayerBase : MonoBehaviour
 
         healthBar.SetHealth(currHealth);
     }
+    public void IncreaseSpecial(float damage)
+    {
+
+        specialBar.SetLevel(damage);
+    }
 
     public void KnockbackPlayer(float force)
     {
         // ???
+    }
+
+    protected void setHitboxes(MoveTable.move m)
+    {
+        LHand.set(MoveTable.use(m, color, MoveTable.hitbox.lh));
+        RHand.set(MoveTable.use(m, color, MoveTable.hitbox.rh));
+        LFoot.set(MoveTable.use(m, color, MoveTable.hitbox.lf));
+        RFoot.set(MoveTable.use(m, color, MoveTable.hitbox.rf));
     }
 }
