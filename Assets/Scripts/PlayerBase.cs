@@ -55,7 +55,7 @@ public abstract class PlayerBase : MonoBehaviour
             willMoveForward = true;
             willMoveBackward = false;
         }else{
-            Debug.Log(gameObject.name + " on cooldown");
+            // Debug.Log(gameObject.name + " on cooldown");
         }
     }
 
@@ -64,7 +64,7 @@ public abstract class PlayerBase : MonoBehaviour
             willMoveBackward = true;
             willMoveForward = false;
         }else{
-            Debug.Log(gameObject.name + " on cooldown");
+            // Debug.Log(gameObject.name + " on cooldown");
         }
     }
 
@@ -246,7 +246,6 @@ public abstract class PlayerBase : MonoBehaviour
 
         if(willMoveForward == willMoveBackward){
             horz = 0;
-            Debug.Log("Both move forward and backward have been set");
         }
 
         horz = horz * Time.deltaTime * Speed;
