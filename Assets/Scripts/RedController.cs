@@ -11,6 +11,7 @@ public class RedController : PlayerBase
     public const float TauntCooldown = 4.45f;
     public const float JabCooldown = 0.45f;
     public const float QuickKickCooldown = 0.6f;
+    public const float TakeHitCooldown = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -103,8 +104,21 @@ public class RedController : PlayerBase
                 Hadouken();
                 StartCoroutine(waitforattack(HadoukenCooldown));
             }
-
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                Block();
+                //StartCoroutine(waitforattack());
+            }
             moveCharacter(CharSpeed);
+        }
+        if (Input.GetKeyUp(KeyCode.L))
+        {
+            UnBlock();
+        }
+        if (Input.GetKeyUp(KeyCode.M))
+        {
+            TakeHit();
+            StartCoroutine(waitforattack(TakeHitCooldown));
         }
         if (Input.GetKeyDown(KeyCode.Delete))
         {
@@ -152,6 +166,21 @@ public class RedController : PlayerBase
     {
         Attacking = true;
         anim.SetTrigger("QuickKick");
+    }
+    public override void Block()
+    {
+        Attacking = true;
+        anim.SetBool("Blocking", true);
+    }
+    public override void UnBlock()
+    {
+        Attacking = false;
+        anim.SetBool("Blocking", false);
+    }
+    public override void TakeHit()
+    {
+        Attacking = true;
+        anim.SetTrigger("TakeHit");
     }
     protected override IEnumerator waitforattack(float f)
     {
