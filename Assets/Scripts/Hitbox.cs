@@ -43,7 +43,7 @@ public class Hitbox : MonoBehaviour {
     {
         if (other.tag != "Player")
         {
-            Debug.Log("Not a player");
+            // Debug.Log("Not a player");
             return;
         }
             
@@ -57,18 +57,19 @@ public class Hitbox : MonoBehaviour {
 
         if (damage < 1)
         {
-            Debug.Log("Is not supposed to do damage right now.");
+            // Debug.Log("Is not supposed to do damage right now.");
             return;
         }
             
 
         PlayerBase otherChar = other.gameObject.GetComponent<PlayerBase>();
 
-        if (damage > 0)
-            Debug.Log("Should have done damage?");
-        else
-            Debug.Log("Collided with 0 damage?");
-
+        if (damage > 0){
+            Debug.Log("Should have done " + damage+"?");
+        }
+        else{
+            // Debug.Log("Collided with 0 damage?");
+        }
         otherChar.DamagePlayer(damage);
         otherChar.KnockbackPlayer(knockback);
         Reset();

@@ -34,34 +34,43 @@ public class AIController : MonoBehaviour
     }
 
     protected Node SpaceHeavyPunch(){
-        return new Sequence(
+        return new Race(
+                new LeafWait(4000),
+                new Sequence(
                     KeepSpacing(1),
                     new LeafInvoke(() =>
                     {
                         player.Punch();
                     })
-                );
+                )
+        );
     }
 
     protected Node SpaceHeavyKick(){
-        return new Sequence(
-                    KeepSpacing(2f),
+        return new Race(
+                new LeafWait(4000),
+                new Sequence(
+                    KeepSpacing(1.5f),
                     new LeafInvoke(() =>
                     {
                         player.RoundHouse();
                     })
-                );
+                )
+        );
     }
 
     protected Node SpaceHadouken(){
-        return new Sequence(
-                    // new LeafAssert(() => player.specialReady()),
-                    KeepSpacing(8),
+        return new Race(
+                new LeafWait(4000),
+                new Sequence(
+                    new LeafAssert(() => player.specialReady()),
+                    KeepSpacing(5),
                     new LeafInvoke(() =>
                     {
                         player.Hadouken();
                     })
-                );
+                )
+        );
     }
 
     protected Node KeepSpacing(float dist){
@@ -79,7 +88,7 @@ public class AIController : MonoBehaviour
 
         if (IsInThreshold(dist))
         {
-            Debug.Log(player.name + " Made it to destination, " + DistanceBetweenPlayers());
+            // Debug.Log(player.name + " Made it to destination, " + DistanceBetweenPlayers());
             return RunStatus.Success;
         }
 
