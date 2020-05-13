@@ -24,7 +24,7 @@ public class Hitbox : MonoBehaviour {
 
     public void set(float d, float k)
     {
-        if(d > 0) Debug.Log("Set damage to " + d);
+        // if(d > 0)Debug.Log("Set damage to " + d);
 
         damage = d;
         knockback = k;
@@ -32,7 +32,7 @@ public class Hitbox : MonoBehaviour {
 
     public void Reset()
     {
-        Debug.Log("reset");
+        // Debug.Log("reset");
         damage = 0f;
         knockback = 0f;
     }

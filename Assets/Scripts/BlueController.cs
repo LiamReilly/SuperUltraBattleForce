@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class BlueController : PlayerBase
 {
-    public const float JumpCooldown = 1f;
-    public const float KickCooldown = 0.9f;
-    public const float PunchCooldown = 0.8f;
-    public const float HadoukenCooldown = 0.9f;
-    public const float TauntCooldown = 2.7f;
-    public const float JabCooldown = 0.45f;
-    public const float QuickKickCooldown = 0.6f;
-    public const float TakeHitCooldown = 0.3f;
+    public new float JumpCooldown = 1f;
+    public new float KickCooldown = 0.9f;
+    public new float PunchCooldown = 0.8f;
+    public new float HadoukenCooldown = 0.9f;
+    public new float TauntCooldown = 2.7f;
+    public new float JabCooldown = 0.45f;
+    public new float QuickKickCooldown = 0.6f;
+    public new float TakeHitCooldown = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -67,50 +67,41 @@ public class BlueController : PlayerBase
         if (horz > 0) anim.SetFloat("Velocity", 1);
         if (horz < 0) anim.SetFloat("Velocity", -1);
         CharSpeed = new Vector3(0f, 0f, horz);
-        if (!Attacking)
+        if (!CannotAttack)
         {
             if (Input.GetKeyDown(KeyCode.Keypad2))
             {
                 RoundHouse();
-                StartCoroutine(waitforattack(KickCooldown));
             }
             if (Input.GetKeyDown(KeyCode.Keypad4))
             {
                 Jab();
-                StartCoroutine(waitforattack(JabCooldown));
             }
             if (Input.GetKeyDown(KeyCode.Keypad1))
             {
                 QuickKick();
-                StartCoroutine(waitforattack(QuickKickCooldown));
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 Jump();
-                StartCoroutine(waitforattack(JumpCooldown));
             }
             if (Input.GetKeyDown(KeyCode.Keypad5))
             {
                 Punch();
-                StartCoroutine(waitforattack(PunchCooldown));
             }
             if (Input.GetKeyDown(KeyCode.KeypadPlus))
             {
                 Taunt();
-                StartCoroutine(waitforattack(TauntCooldown));
             }
-            if (Input.GetKeyDown(KeyCode.Keypad6)&&specialBar.FindLevel()==100f)
+            if (Input.GetKeyDown(KeyCode.Keypad6) && specialBar.GetLevel() == 100f)
             {
                 Hadouken();
-                specialBar.SetLevel(-100);
-                StartCoroutine(waitforattack(HadoukenCooldown));
             }
             if (Input.GetKeyDown(KeyCode.Keypad3))
             {
                 Block();
-                //StartCoroutine(waitforattack());
             }
-            
+
             moveCharacter(CharSpeed);
         }
         if (Input.GetKeyUp(KeyCode.Keypad3))
@@ -120,7 +111,6 @@ public class BlueController : PlayerBase
         if (Input.GetKeyUp(KeyCode.Keypad0))
         {
             TakeHit();
-            StartCoroutine(waitforattack(TakeHitCooldown));
         }
 
         if (Input.GetKeyDown(KeyCode.Backspace))
@@ -129,21 +119,6 @@ public class BlueController : PlayerBase
         }
 
 
-    }
-
-    protected override IEnumerator waitforHadouken(float f)
-    {
-        yield return new WaitForSeconds(f);
-        Hadouken h = Instantiate(Projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f, gameObject.transform.position.z), Quaternion.identity).GetComponent<Hadouken>();
-        if (isFacingRight)
-        {
-            h.Initialize(Vector3.forward, this);
-        }
-        else
-        {
-            h.Initialize(-Vector3.forward, this);
-        }
-        audioSource.PlayOneShot(hadouken, 0.1f);
     }
 
 }

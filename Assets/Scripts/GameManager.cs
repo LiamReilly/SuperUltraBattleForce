@@ -334,15 +334,15 @@ public class GameManager : MonoBehaviour
         Health.SetActive(true);
         Specialbars[0].SetActive(true);
         //var playerbases  = p1.GetComponents<PlayerBase>();
-        p2.tag = "Player2";
+
         //playerbases[1].healthBar = bar1;
         p1.GetComponent<PlayerBase>().healthBar = bar1;
         p2.GetComponent<PlayerBase>().healthBar = bar2;
         p1.GetComponent<PlayerBase>().specialBar = Specialbars[1].GetComponent<SpecialBar>();
         p2.GetComponent<PlayerBase>().specialBar = Specialbars[2].GetComponent<SpecialBar>();
         //bar1.SetUp(playerbases[1]);
-        //bar1.SetUp(p1.GetComponent<PlayerBase>());
-        //bar2.SetUp(p2.GetComponent<PlayerBase>());
+        bar1.SetUp(p1.GetComponent<PlayerBase>());
+        bar2.SetUp(p2.GetComponent<PlayerBase>());
         //print("Hello Sir");
 
         if (gameType == GameType.CPUMODE){
@@ -355,12 +355,15 @@ public class GameManager : MonoBehaviour
             ai2.player = p2.GetComponent<PlayerBase>();
             ai2.player.isAI = true;
 
-            
+
         } else if (gameType == GameType.ONEPLAYER){
             AIController ai2 = p2.AddComponent<AIController>();
 
             ai2.player = p2.GetComponent<PlayerBase>();
             ai2.player.isAI = true;
+        } else if(gameType == GameType.TRAINING){
+            p1.GetComponent<PlayerBase>().isTraining = true;
+            p2.GetComponent<PlayerBase>().isTraining = true;
         }
         
 

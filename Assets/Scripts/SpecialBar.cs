@@ -23,12 +23,12 @@ public class SpecialBar : MonoBehaviour
             specialBar.value += Time.deltaTime*50;
         }
     }
-    public float FindLevel()
+    public float GetLevel()
     {
         return specialBar.value;
     }
 
-    public void SetLevel(float power)
+    public void AddLevel(float power)
     {
         specialBar.value += power;
     }
