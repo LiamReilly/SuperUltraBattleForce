@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SpecialBar : MonoBehaviour
 {
     public Slider specialBar;
+    public bool frozen;
     //public PlayerBase playerHealth;
     //public GameObject player;
     // Start is called before the first frame update
@@ -18,9 +19,9 @@ public class SpecialBar : MonoBehaviour
     }
     private void Update()
     {
-        if (specialBar.value < 100f)
+        if (specialBar.value < 100f && !frozen)
         {
-            specialBar.value += Time.deltaTime*50;
+            specialBar.value += Time.deltaTime*5;
         }
     }
     public float GetLevel()
@@ -32,5 +33,9 @@ public class SpecialBar : MonoBehaviour
     {
         specialBar.value += power;
     }
-    
+    public void ResetLevel()
+    {
+        specialBar.value = 0f;
+    }
+
 }

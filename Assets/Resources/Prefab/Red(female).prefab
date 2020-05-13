@@ -822,16 +822,26 @@ MonoBehaviour:
   Projectile: {fileID: 8013795775715915425, guid: 8fa367c9203ee8c4986afb762be4d764,
     type: 3}
   healthBar: {fileID: 0}
+  specialBar: {fileID: 0}
   isFacingRight: 1
   audioSource: {fileID: 0}
   hadouken: {fileID: 8300000, guid: f62fe212fd75cad47a80dad6378416ba, type: 3}
   punch: {fileID: 8300000, guid: de2b8db4370bf5649847a51b0fa67986, type: 3}
   isAI: 0
   aIController: {fileID: 0}
+  isTraining: 0
   LHand: {fileID: 7122355065340316605}
   LFoot: {fileID: 3646000924259760252}
   RHand: {fileID: 7920032055259598977}
   RFoot: {fileID: 7427261489345883454}
+  jumpCooldown: 0
+  kickCooldown: 0
+  punchCooldown: 0
+  hadoukenCooldown: 0
+  tauntCooldown: 0
+  jabCooldown: 0
+  quickKickCooldown: 0
+  takeHitCooldown: 0
 --- !u!1 &3631553389259446498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,6 +2584,11 @@ PrefabInstance:
       propertyPath: parentChar
       value: 
       objectReference: {fileID: 3628890122024774791}
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+        type: 3}
+      propertyPath: scale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2666,6 +2681,11 @@ PrefabInstance:
       propertyPath: parentChar
       value: 
       objectReference: {fileID: 3628890122024774791}
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+        type: 3}
+      propertyPath: scale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2773,6 +2793,11 @@ PrefabInstance:
       propertyPath: parentChar
       value: 
       objectReference: {fileID: 3628890122024774791}
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+        type: 3}
+      propertyPath: scale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2865,6 +2890,11 @@ PrefabInstance:
       propertyPath: parentChar
       value: 
       objectReference: {fileID: 3628890122024774791}
+    - target: {fileID: 1033859016792203562, guid: 44bd0671eb56af04bb6aedb18911fc28,
+        type: 3}
+      propertyPath: scale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 430769632618683949, guid: 44bd0671eb56af04bb6aedb18911fc28,
         type: 3}
       propertyPath: m_LocalPosition.x

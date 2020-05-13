@@ -29,4 +29,8 @@ public class HealthBar : MonoBehaviour
         //healthBar.maxValue = 100f;
         healthBar.value = healthBar.maxValue;
     }
+    public float GetValue()
+    {
+        return healthBar.value;
+    }
 }
