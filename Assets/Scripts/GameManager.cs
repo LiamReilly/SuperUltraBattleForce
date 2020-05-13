@@ -486,35 +486,42 @@ public class GameManager : MonoBehaviour
         Rounds[1].GetComponent<RoundUpdater>().ResetRounds();
         //var playerbases  = p1.GetComponents<PlayerBase>();
 
+        PlayerBase p1Script = p1.GetComponent<PlayerBase>();
+        PlayerBase p2Script = p2.GetComponent<PlayerBase>();
+
+
         //playerbases[1].healthBar = bar1;
-        p1.GetComponent<PlayerBase>().healthBar = bar1;
-        p2.GetComponent<PlayerBase>().healthBar = bar2;
-        p1.GetComponent<PlayerBase>().specialBar = Specialbars[1].GetComponent<SpecialBar>();
-        p2.GetComponent<PlayerBase>().specialBar = Specialbars[2].GetComponent<SpecialBar>();
+        p1Script.healthBar = bar1;
+        p2Script.healthBar = bar2;
+        p1Script.specialBar = Specialbars[1].GetComponent<SpecialBar>();
+        p2Script.specialBar = Specialbars[2].GetComponent<SpecialBar>();
         //bar1.SetUp(playerbases[1]);
-        bar1.SetUp(p1.GetComponent<PlayerBase>());
-        bar2.SetUp(p2.GetComponent<PlayerBase>());
+        bar1.SetUp(p1Script);
+        bar2.SetUp(p2Script);
         //print("Hello Sir");
 
         if (gameType == GameType.CPUMODE){
             AIController ai1 = p1.AddComponent<AIController>();
             AIController ai2 = p2.AddComponent<AIController>();
 
-            ai1.player = p1.GetComponent<PlayerBase>();
+            ai1.player = p1Script;
+            ai1.opponent = p2Script;
             ai1.player.isAI = true;
 
-            ai2.player = p2.GetComponent<PlayerBase>();
+            ai2.player = p2Script;
+            ai2.opponent = p1Script;
             ai2.player.isAI = true;
 
 
         } else if (gameType == GameType.ONEPLAYER){
             AIController ai2 = p2.AddComponent<AIController>();
 
-            ai2.player = p2.GetComponent<PlayerBase>();
+            ai2.player = p2Script;
+            ai2.opponent = p1Script;
             ai2.player.isAI = true;
         } else if(gameType == GameType.TRAINING){
-            p1.GetComponent<PlayerBase>().isTraining = true;
-            p2.GetComponent<PlayerBase>().isTraining = true;
+            p1Script.isTraining = true;
+            p2Script.isTraining = true;
         }
         
 

@@ -46,6 +46,47 @@ public abstract class PlayerBase : MonoBehaviour
     {
         gameObject.transform.Translate(amount);
     }
+
+    public void moveForward(){
+        if(!CannotAttack){
+            float horz = 0;
+
+            if(isFacingRight){
+                horz = -1;
+            }else{
+                horz = 1;
+            }
+
+            horz = horz * Time.deltaTime * Speed;
+
+            move = true;
+            anim.SetBool("Move", move);
+            anim.SetFloat("Velocity", horz/Time.deltaTime);
+            CharSpeed = new Vector3(0f, 0f, horz);
+            moveCharacter(CharSpeed);
+        }
+    }
+
+    public void moveBackward(){
+        if(!CannotAttack){
+            float horz = 0;
+
+            if(isFacingRight){
+                horz = Speed;
+            }else{
+                horz = -Speed;
+            }
+
+            horz = horz * Time.deltaTime * Speed;
+
+            move = true;
+            anim.SetBool("Move", move);
+            anim.SetFloat("Velocity", horz/Time.deltaTime);
+            CharSpeed = new Vector3(0f, 0f, horz);
+            moveCharacter(CharSpeed);
+        }
+    }
+
     public void RoundHouse()
     {
         CannotAttack = true;
@@ -74,11 +115,13 @@ public abstract class PlayerBase : MonoBehaviour
     }
     public void Hadouken()
     {
-        CannotAttack = true;
-        anim.SetTrigger("Hadouken");
-        StartCoroutine(waitforHadouken(0.9f));
-        specialBar.AddLevel(-100);
-        StartCoroutine(waitforattack(hadoukenCooldown));
+        if(specialBar.isFull()){
+            CannotAttack = true;
+            anim.SetTrigger("Hadouken");
+            StartCoroutine(waitforHadouken(0.9f));
+            specialBar.ResetLevel();
+            StartCoroutine(waitforattack(hadoukenCooldown));
+        }
     }
     public void Jab()
     {

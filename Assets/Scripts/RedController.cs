@@ -40,84 +40,85 @@ public class RedController : PlayerBase
     // Update is called once per frame
     void Update()
     {
-        
-        float horz = 0;
-        if (Input.GetKey(KeyCode.A))
+        if (!isAI)
         {
-            horz = -1;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            horz = 1;
-        }
-        if (Input.GetKey(KeyCode.A) == Input.GetKey(KeyCode.D))
-        {
-            horz = 0;
-        }
-        horz = horz * Time.deltaTime * Speed;
-        if (horz != 0)
-        {
-            move = true;
-        }
-        else
-        {
-            move = false;
-        }
-        anim.SetBool("Move", move);
-        if (horz > 0) anim.SetFloat("Velocity", 1);
-        if (horz < 0) anim.SetFloat("Velocity", -1);
-        
-        CharSpeed = new Vector3(0f, 0f, horz);
-        if (!CannotAttack)
-        {
-            if (Input.GetKeyDown(KeyCode.K))
+            float horz = 0;
+            if (Input.GetKey(KeyCode.A))
             {
-                RoundHouse();
+                horz = -1;
             }
-            if (Input.GetKeyDown(KeyCode.U))
+            if (Input.GetKey(KeyCode.D))
             {
-                Jab();
+                horz = 1;
             }
-            if (Input.GetKeyDown(KeyCode.J))
+            if (Input.GetKey(KeyCode.A) == Input.GetKey(KeyCode.D))
             {
-                QuickKick();
+                horz = 0;
             }
-            if (Input.GetKeyDown(KeyCode.W))
+            horz = horz * Time.deltaTime * Speed;
+            if (horz != 0)
             {
-                Jump();
+                move = true;
             }
-            if (Input.GetKeyDown(KeyCode.I))
+            else
             {
-                Punch();
+                move = false;
             }
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                Taunt();
-            }
-            if (Input.GetKeyDown(KeyCode.O) && specialBar.GetLevel() == 100f)
-            {
-                Hadouken();
-            }
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                Block();
-            }
-            moveCharacter(CharSpeed);
-        }
-        if (Input.GetKeyUp(KeyCode.L))
-        {
-            UnBlock();
-        }
-        if (Input.GetKeyUp(KeyCode.M))
-        {
-            TakeHit();
-        }
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-            DamagePlayer(10);
-        }
+            anim.SetBool("Move", move);
+            if (horz > 0) anim.SetFloat("Velocity", Speed);
+            if (horz < 0) anim.SetFloat("Velocity", -Speed);
 
+            CharSpeed = new Vector3(0f, 0f, horz);
+            if (!CannotAttack)
+            {
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    RoundHouse();
+                }
+                if (Input.GetKeyDown(KeyCode.U))
+                {
+                    Jab();
+                }
+                if (Input.GetKeyDown(KeyCode.J))
+                {
+                    QuickKick();
+                }
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    Jump();
+                }
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    Punch();
+                }
+                if (Input.GetKeyDown(KeyCode.N))
+                {
+                    Taunt();
+                }
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    Hadouken();
+                }
+                if (Input.GetKeyDown(KeyCode.L))
+                {
+                    Block();
+                }
+                moveCharacter(CharSpeed);
+            }
+            if (Input.GetKeyUp(KeyCode.L))
+            {
+                UnBlock();
+            }
+            if (Input.GetKeyUp(KeyCode.M))
+            {
+                TakeHit();
+            }
+            if (Input.GetKeyDown(KeyCode.Delete))
+            {
+                DamagePlayer(10);
+            }
 
+        }
     }
 
 }

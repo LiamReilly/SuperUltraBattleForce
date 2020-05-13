@@ -31,13 +31,17 @@ public class SpecialBar : MonoBehaviour
 
     public void AddLevel(float power)
     {
+        if(power < 0){
+            Debug.Log("That's illegal, cannot add negative level to special meter");
+            return;
+        }
         specialBar.value += power;
     }
 
     public bool isFull(){
         return specialBar.value >= 100f;
     }
-    
+
     public void ResetLevel()
     {
         specialBar.value = 0f;

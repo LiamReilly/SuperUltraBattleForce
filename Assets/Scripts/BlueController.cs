@@ -41,84 +41,87 @@ public class BlueController : PlayerBase
     // Update is called once per frame
     void Update()
     {
-        float horz = 0;
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (!isAI)
         {
-            horz = -1;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            horz = 1;
-        }
-        if (Input.GetKey(KeyCode.RightArrow) == Input.GetKey(KeyCode.LeftArrow))
-        {
-            horz = 0;
-        }
-        horz = horz * Time.deltaTime * Speed;
-        if (horz != 0)
-        {
-            move = true;
-        }
-        else
-        {
-            move = false;
-        }
-        anim.SetBool("Move", move);
-        if (horz > 0) anim.SetFloat("Velocity", 1);
-        if (horz < 0) anim.SetFloat("Velocity", -1);
-        CharSpeed = new Vector3(0f, 0f, horz);
-        if (!CannotAttack)
-        {
-            if (Input.GetKeyDown(KeyCode.Keypad2))
+            float horz = 0;
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                RoundHouse();
+                horz = -1;
             }
-            if (Input.GetKeyDown(KeyCode.Keypad4))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                Jab();
+                horz = 1;
             }
-            if (Input.GetKeyDown(KeyCode.Keypad1))
+            if (Input.GetKey(KeyCode.RightArrow) == Input.GetKey(KeyCode.LeftArrow))
             {
-                QuickKick();
+                horz = 0;
             }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            horz = horz * Time.deltaTime * Speed;
+            if (horz != 0)
             {
-                Jump();
+                move = true;
             }
-            if (Input.GetKeyDown(KeyCode.Keypad5))
+            else
             {
-                Punch();
+                move = false;
             }
-            if (Input.GetKeyDown(KeyCode.KeypadPlus))
+            anim.SetBool("Move", move);
+            if (horz > 0) anim.SetFloat("Velocity", Speed);
+            if (horz < 0) anim.SetFloat("Velocity", -Speed);
+            CharSpeed = new Vector3(0f, 0f, horz);
+            if (!CannotAttack)
             {
-                Taunt();
+                if (Input.GetKeyDown(KeyCode.Keypad2))
+                {
+                    RoundHouse();
+                }
+                if (Input.GetKeyDown(KeyCode.Keypad4))
+                {
+                    Jab();
+                }
+                if (Input.GetKeyDown(KeyCode.Keypad1))
+                {
+                    QuickKick();
+                }
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    Jump();
+                }
+                if (Input.GetKeyDown(KeyCode.Keypad5))
+                {
+                    Punch();
+                }
+                if (Input.GetKeyDown(KeyCode.KeypadPlus))
+                {
+                    Taunt();
+                }
+                if (Input.GetKeyDown(KeyCode.Keypad6))
+                {
+                    Hadouken();
+                }
+                if (Input.GetKeyDown(KeyCode.Keypad3))
+                {
+                    Block();
+                }
+
+                moveCharacter(CharSpeed);
             }
-            if (Input.GetKeyDown(KeyCode.Keypad6) && specialBar.GetLevel() == 100f)
+            if (Input.GetKeyUp(KeyCode.Keypad3))
             {
-                Hadouken();
+                UnBlock();
             }
-            if (Input.GetKeyDown(KeyCode.Keypad3))
+            if (Input.GetKeyUp(KeyCode.Keypad0))
             {
-                Block();
+                TakeHit();
             }
 
-            moveCharacter(CharSpeed);
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                DamagePlayer(10);
+            }
+        }else{
+            
         }
-        if (Input.GetKeyUp(KeyCode.Keypad3))
-        {
-            UnBlock();
-        }
-        if (Input.GetKeyUp(KeyCode.Keypad0))
-        {
-            TakeHit();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            DamagePlayer(10);
-        }
-
-
     }
 
 }
