@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public GameObject Player2;
     public GameObject Player3;
     public GameObject Player4;
+    public GameObject[] PickedPlayers;
     public GameObject Health;
     public HealthBar bar1;
     public HealthBar bar2;
@@ -42,6 +43,10 @@ public class GameManager : MonoBehaviour
     public AudioClip[] Songs;
     private int CurrentSong;
     public GameObject[] Specialbars;
+    public GameObject RoundsParent;
+    public GameObject Countdown;
+    public RoundUpdater[] Rounds;
+    public GameObject EndOfMatchSelection;
     
     // Start is called before the first frame update
     void Awake()
@@ -80,6 +85,24 @@ public class GameManager : MonoBehaviour
                     UnPause();
                 }
             }
+            if (gameTime <= 3f)
+            {
+                Countdown.SetActive(true);
+                Countdown.GetComponent<Text>().text = time;
+            }
+            if (gameTime < 0f)
+            {
+                gameTime = 0f;
+                //Countdown.GetComponent<Text>().text = "Match Over";
+                matchStart = false;
+                EndRound();
+            }
+            if(bar1.GetComponent<HealthBar>().GetValue() <=0 || bar2.GetComponent<HealthBar>().GetValue() <= 0)
+            {
+                gameTime = 0f;
+
+            }
+            
         }
 
         
@@ -96,6 +119,7 @@ public class GameManager : MonoBehaviour
             startButtons.SetActive(true);
             Health.SetActive(false);
             Specialbars[0].SetActive(false);
+            RoundsParent.SetActive(false);
         }
         timer = GameObject.Find("Timer").GetComponent<Text>();
         PauseItems = GameObject.Find("PauseItems");
@@ -125,28 +149,36 @@ public class GameManager : MonoBehaviour
                 p1.AddComponent<RedController>();
                 p2.GetComponent<RedController>().enabled = false;
                 p2.AddComponent<BlueController>();*/
+                PickedPlayers[0] = p1;
+                PickedPlayers[1] = p2;
                 FinishLevelSetup(p1, p2);
             }
             if (CharacterChip.CharacterSelected.Equals("Red") && Player2Chip.CharacterSelected.Equals("Red"))
             {
                 var p1 = Instantiate(Player1, Players.transform.GetChild(0).position, Quaternion.identity);
                 var p2 = Instantiate(Player3, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
-               /* p2.GetComponent<RedController>().enabled = false;
-                p2.AddComponent<BlueController>();*/
+                /* p2.GetComponent<RedController>().enabled = false;
+                 p2.AddComponent<BlueController>();*/
+                PickedPlayers[0] = p1;
+                PickedPlayers[1] = p2;
                 FinishLevelSetup(p1, p2);
             }
             if(CharacterChip.CharacterSelected.Equals("Red") && Player2Chip.CharacterSelected.Equals("Blue"))
             {
                 var p1 = Instantiate(Player1, Players.transform.GetChild(0).position, Quaternion.identity);
                 var p2 = Instantiate(Player2, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
+                PickedPlayers[0] = p1;
+                PickedPlayers[1] = p2;
                 FinishLevelSetup(p1, p2);
             }
             if (CharacterChip.CharacterSelected.Equals("Blue") && Player2Chip.CharacterSelected.Equals("Blue"))
             {
                 var p1 = Instantiate(Player4, Players.transform.GetChild(0).position, Quaternion.identity);
                 var p2 = Instantiate(Player2, Players.transform.GetChild(1).position, Quaternion.Euler(new Vector3(0f, 180f, 0)));
-               /* p1.GetComponent<BlueController>().enabled = false;
-                p1.AddComponent<RedController>();*/
+                /* p1.GetComponent<BlueController>().enabled = false;
+                 p1.AddComponent<RedController>();*/
+                PickedPlayers[0] = p1;
+                PickedPlayers[1] = p2;
                 FinishLevelSetup(p1, p2);
             }
             
@@ -184,6 +216,7 @@ public class GameManager : MonoBehaviour
     {
         Button.Play();
         Music.volume *= 2f;
+        if (Music.volume > 0.5f) Music.volume = 0.5f;
         Time.timeScale = 1;
         PauseItems.SetActive(false);
     }
@@ -192,6 +225,11 @@ public class GameManager : MonoBehaviour
         Button.Play();
         UnPause();
         SceneManager.LoadScene("StartMenu");
+        Specialbars[1].GetComponent<SpecialBar>().ResetLevel();
+        Specialbars[2].GetComponent<SpecialBar>().ResetLevel();
+        Specialbars[1].GetComponent<SpecialBar>().frozen = false;
+        Specialbars[2].GetComponent<SpecialBar>().frozen = false;
+        if (EndOfMatchSelection.activeSelf) EndOfMatchSelection.SetActive(false);
         matchStart = false;
         
     }
@@ -306,6 +344,16 @@ public class GameManager : MonoBehaviour
             Music.Play();
             MusicChanger.GetComponentInChildren<Text>().text = Songs[CurrentSong].name;
     }
+    /*public void Rematch()
+    {
+        Button.Play();
+        EndOfMatchSelection.SetActive(false);
+        StopAllCoroutines();
+        Countdown.SetActive(false);
+        LoadLevel(SceneManager.GetActiveScene().name);
+        StartCoroutine(ResetPlayers(3f));
+
+    }*/
     #endregion
     IEnumerator WaitForSelection(float f)
     {
@@ -322,6 +370,104 @@ public class GameManager : MonoBehaviour
         }
         
     }
+    IEnumerator DisableAftersecs(float f, GameObject Disable)
+    {
+        yield return new WaitForSeconds(f);
+        Disable.SetActive(false);
+    }
+    IEnumerator ResetPlayers(float f)
+    {
+        yield return new WaitForSeconds(f);
+        var currentRound = Rounds[0].RoundCount + Rounds[1].RoundCount - 1;
+        print(currentRound);
+        Countdown.GetComponent<Text>().text = "Round" + currentRound + "\nstart!";
+        Countdown.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        Countdown.SetActive(false);
+        Specialbars[1].GetComponent<SpecialBar>().frozen = false;
+        Specialbars[2].GetComponent<SpecialBar>().frozen = false;
+        PickedPlayers[0].GetComponent<PlayerBase>().enabled = true;
+        PickedPlayers[1].GetComponent<PlayerBase>().enabled = true;
+        string time = string.Format("{0:N0}", maxGameTime);
+        gameTime = maxGameTime;
+        timer.text = time;
+        matchStart = true;
+        
+
+    }
+    IEnumerator OfferEndofMatchOptions()
+    {
+        yield return new WaitForSeconds(2f);
+        Countdown.SetActive(false);
+        EndOfMatchSelection.SetActive(true);
+    }
+    private void EndRound()
+    {
+        if(bar1.GetComponent<HealthBar>().GetValue() > bar2.GetComponent<HealthBar>().GetValue())
+        {
+            var result = Rounds[0].IncreaseRoundCount();
+            print("p1 won round");
+            PickedPlayers[0].GetComponent<PlayerBase>().enabled = false;
+            PickedPlayers[1].GetComponent<PlayerBase>().enabled = false;
+            Specialbars[1].GetComponent<SpecialBar>().frozen = true;
+            Specialbars[2].GetComponent<SpecialBar>().frozen = true;
+            if (result)
+            {
+                EndMatch(PickedPlayers[0].GetComponent<PlayerBase>());
+            }
+            else
+            {
+                RoundReset();
+            }
+        }
+        if (bar1.GetComponent<HealthBar>().GetValue() < bar2.GetComponent<HealthBar>().GetValue())
+        {
+            var result = Rounds[1].IncreaseRoundCount();
+            print("p2 won round");
+            PickedPlayers[0].GetComponent<PlayerBase>().enabled = false;
+            PickedPlayers[1].GetComponent<PlayerBase>().enabled = false;
+            Specialbars[1].GetComponent<SpecialBar>().frozen = true;
+            Specialbars[2].GetComponent<SpecialBar>().frozen = true;
+            if (result)
+            {
+                EndMatch(PickedPlayers[1].GetComponent<PlayerBase>());
+            }
+            else
+            {
+                RoundReset();
+            }
+        }
+        if (PickedPlayers[0].GetComponent<PlayerBase>().currHealth == PickedPlayers[1].GetComponent<PlayerBase>().currHealth)
+        {
+            //figure out what to do for ties
+            print("tie lul figure it out");
+        }
+    }
+    private void RoundReset()
+    {
+        Countdown.GetComponent<Text>().text = "Round Over";
+        StartCoroutine(DisableAftersecs(3f, Countdown));
+        PickedPlayers[0].GetComponent<PlayerBase>().currHealth = PickedPlayers[0].GetComponent<PlayerBase>().maxHealth;
+        PickedPlayers[1].GetComponent<PlayerBase>().currHealth = PickedPlayers[1].GetComponent<PlayerBase>().maxHealth;
+        bar1.SetUp(PickedPlayers[0].GetComponent<PlayerBase>());
+        bar2.SetUp(PickedPlayers[1].GetComponent<PlayerBase>());
+        StartCoroutine(ResetPlayers(3f));
+    }
+    private void EndMatch(PlayerBase winner)
+    {
+        if (winner.name.StartsWith("R"))
+        {
+            string str = winner.name.Substring(0, 3);
+            Countdown.GetComponent<Text>().text = str + "\nWins!";
+        }
+        else
+        {
+            string str = winner.name.Substring(0, 4);
+            Countdown.GetComponent<Text>().text = str + "\nWins!";
+        }
+        StartCoroutine(OfferEndofMatchOptions());
+        
+    }
     void FinishLevelSetup(GameObject p1, GameObject p2)
     {
         var placeholder1 = Players.transform.GetChild(0);
@@ -333,6 +479,11 @@ public class GameManager : MonoBehaviour
         Destroy(Players);
         Health.SetActive(true);
         Specialbars[0].SetActive(true);
+        //Specialbars[1].GetComponent<SpecialBar>().ResetLevel();
+        //Specialbars[2].GetComponent<SpecialBar>().ResetLevel();
+        RoundsParent.SetActive(true);
+        Rounds[0].GetComponent<RoundUpdater>().ResetRounds();
+        Rounds[1].GetComponent<RoundUpdater>().ResetRounds();
         //var playerbases  = p1.GetComponents<PlayerBase>();
 
         //playerbases[1].healthBar = bar1;
