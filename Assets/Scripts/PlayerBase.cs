@@ -17,6 +17,9 @@ public abstract class PlayerBase : MonoBehaviour
     public AudioClip hadouken;
     public AudioClip punch;
 
+    public bool isAI = false;
+    public AIController aIController;
+
     protected Vector3 CharSpeed;
     protected Animator anim;
     protected bool Attacking;
@@ -69,6 +72,21 @@ public abstract class PlayerBase : MonoBehaviour
         Attacking = true;
         setHitboxes(MoveTable.move.wK);
         anim.SetTrigger("QuickKick");
+    }
+    public void Block()
+    {
+        Attacking = true;
+        anim.SetBool("Blocking", true);
+    }
+    public void UnBlock()
+    {
+        Attacking = false;
+        anim.SetBool("Blocking", false);
+    }
+    public void TakeHit()
+    {
+        Attacking = true;
+        anim.SetTrigger("TakeHit");
     }
     protected IEnumerator waitforattack(float f)
     {

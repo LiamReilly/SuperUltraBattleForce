@@ -17,7 +17,14 @@ public class GameManager : MonoBehaviour
     private int count = 0;
     public GameObject startButtons;
     public GameObject GameTypeButtons;
-    private string GameType;
+    private enum GameType {
+        ONEPLAYER, TWOPLAYER, TRAINING, CPUMODE
+    }
+
+    private GameType gameType;
+
+    public GameObject playerAIPrefab;
+
     public GameObject StageSelect;
     public GameObject CharacterSelect;
     private AudioSource Music;
@@ -218,26 +225,26 @@ public class GameManager : MonoBehaviour
     public void onePlayer()
     {
         Button.Play();
-        GameType = "onePlayer";
+        gameType = GameType.ONEPLAYER;
         showCharacters();
         //when we have these different modes, will change which prefab fighters to load into each level
     }
     public void twoPlayer()
     {
         Button.Play();
-        GameType = "twoPlayer";
+        gameType = GameType.TWOPLAYER;
         showCharacters();
     }
     public void Training()
     {
         Button.Play();
-        GameType = "Training";
+        gameType = GameType.TRAINING;
         showCharacters();
     }
-    public void Cockfight()
+    public void CPUMode()
     {
         Button.Play();
-        GameType = "Cockfight";
+        gameType = GameType.CPUMODE;
         showCharacters();
     }
     void showCharacters()
@@ -253,7 +260,6 @@ public class GameManager : MonoBehaviour
         Button.Play();
         StageSelect.SetActive(true);
         MusicChanger.GetComponentInChildren<Text>().text = Songs[CurrentSong].name;
-        MusicChanger.transform.GetChild(1).GetComponent<Button>().interactable = false;
     }
     public void Stage1()
     {
@@ -279,10 +285,9 @@ public class GameManager : MonoBehaviour
     public void MusicLeft()
     {
             CurrentSong--;
-            if (MusicChanger.transform.GetChild(2).GetComponent<Button>().interactable == false) MusicChanger.transform.GetChild(2).GetComponent<Button>().interactable = true;
-            if (CurrentSong == 0)
+            if (CurrentSong < 0)
             {
-                MusicChanger.transform.GetChild(1).GetComponent<Button>().interactable = false;
+                CurrentSong = Songs.Length-1;
             }
             Music.clip = Songs[CurrentSong];
             Music.Play();
@@ -291,10 +296,9 @@ public class GameManager : MonoBehaviour
     public void MusicRight()
     {
             CurrentSong++;
-            if (MusicChanger.transform.GetChild(1).GetComponent<Button>().interactable == false) MusicChanger.transform.GetChild(1).GetComponent<Button>().interactable = true;
-            if (CurrentSong == Songs.Length - 1)
+            if (CurrentSong >= Songs.Length)
             {
-                MusicChanger.transform.GetChild(2).GetComponent<Button>().interactable = false;
+                CurrentSong = 0;
             }
             Music.clip = Songs[CurrentSong];
             Music.Play();
@@ -335,6 +339,24 @@ public class GameManager : MonoBehaviour
         //bar1.SetUp(p1.GetComponent<PlayerBase>());
         //bar2.SetUp(p2.GetComponent<PlayerBase>());
         //print("Hello Sir");
+
+        if(gameType == GameType.CPUMODE){
+            AIController ai1 = p1.AddComponent<AIController>();
+            AIController ai2 = p2.AddComponent<AIController>();
+
+            ai1.player = p1.GetComponent<PlayerBase>();
+            ai1.player.isAI = true;
+
+            ai2.player = p2.GetComponent<PlayerBase>();
+            ai2.player.isAI = true;
+
+            
+        } else if (gameType == GameType.ONEPLAYER){
+            AIController ai2 = p2.AddComponent<AIController>();
+
+            ai2.player = p2.GetComponent<PlayerBase>();
+            ai2.player.isAI = true;
+        }
         
 
     }

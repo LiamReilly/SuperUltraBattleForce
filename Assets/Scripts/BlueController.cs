@@ -11,6 +11,7 @@ public class BlueController : PlayerBase
     public const float TauntCooldown = 2.7f;
     public const float JabCooldown = 0.45f;
     public const float QuickKickCooldown = 0.6f;
+    public const float TakeHitCooldown = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -103,8 +104,24 @@ public class BlueController : PlayerBase
                 Hadouken();
                 StartCoroutine(waitforattack(HadoukenCooldown));
             }
+            if (Input.GetKeyDown(KeyCode.Keypad3))
+            {
+                Block();
+                //StartCoroutine(waitforattack());
+            }
+            
             moveCharacter(CharSpeed);
         }
+        if (Input.GetKeyUp(KeyCode.Keypad3))
+        {
+            UnBlock();
+        }
+        if (Input.GetKeyUp(KeyCode.Keypad0))
+        {
+            TakeHit();
+            StartCoroutine(waitforattack(TakeHitCooldown));
+        }
+
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             DamagePlayer(10);
@@ -112,6 +129,7 @@ public class BlueController : PlayerBase
 
 
     }
+
     protected override IEnumerator waitforHadouken(float f)
     {
         yield return new WaitForSeconds(f);
