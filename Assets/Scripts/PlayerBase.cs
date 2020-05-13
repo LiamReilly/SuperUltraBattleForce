@@ -180,6 +180,11 @@ public abstract class PlayerBase : MonoBehaviour
 
     public void DamagePlayer(float damage)
     {
+        // reduce damage if blocking
+        // multiply by 0.2 = take 80% less damage
+        if (CannotAttack)
+            damage *= 0.2f;
+
         currHealth -= damage;
 
         if(isTraining && currHealth <= 0){
@@ -196,6 +201,13 @@ public abstract class PlayerBase : MonoBehaviour
 
     public void KnockbackPlayer(float force)
     {
+        // its debatable if we want to change knockback if you're blocking
+        // if we do want to, edit the multiplier here
+
+        if (CannotAttack)
+            force *= 1.0f;
+
+
         TakeHit();
         if(isFacingRight){
             force *= -1;
@@ -205,10 +217,10 @@ public abstract class PlayerBase : MonoBehaviour
 
     protected void setHitboxes(MoveTable.move m)
     {
-        LHand.set(MoveTable.use(m, color, MoveTable.hitbox.lh));
-        RHand.set(MoveTable.use(m, color, MoveTable.hitbox.rh));
-        LFoot.set(MoveTable.use(m, color, MoveTable.hitbox.lf));
-        RFoot.set(MoveTable.use(m, color, MoveTable.hitbox.rf));
+        LHand.set(baseAttack * MoveTable.use(m, color, MoveTable.hitbox.lh));
+        RHand.set(baseAttack * MoveTable.use(m, color, MoveTable.hitbox.rh));
+        LFoot.set(baseAttack * MoveTable.use(m, color, MoveTable.hitbox.lf));
+        RFoot.set(baseAttack * MoveTable.use(m, color, MoveTable.hitbox.rf));
     }
 
     public bool specialReady(){

@@ -23,7 +23,10 @@ public class MoveTable
 
     public static float wPunch(string color, hitbox h)
     {
-        if (h == hitbox.lh)
+        if (h == hitbox.lh && color == "Red")
+            return 5f;
+
+        if (h == hitbox.rh && color == "Blue")
             return 5f;
 
         return 0f;
@@ -31,7 +34,10 @@ public class MoveTable
 
     public static float sPunch(string color, hitbox h)
     {
-        if (h == hitbox.rh)
+        if (h == hitbox.rh && color == "Red")
+            return 20f;
+
+        if (h == hitbox.lh && color == "Blue")
             return 20f;
 
         return 0f;
@@ -39,7 +45,10 @@ public class MoveTable
 
     public static float wKick(string color, hitbox h)
     {
-        if (h == hitbox.rf)
+        if (h == hitbox.rf && color == "Red")
+            return 7f;
+
+        if (h == hitbox.lf && color == "Blue")
             return 7f;
 
         return 0f;
@@ -47,7 +56,11 @@ public class MoveTable
 
     public static float sKick(string color, hitbox h)
     {
-        if (h == hitbox.rh)
+
+        if (h == hitbox.rf && color == "Red")
+            return 15f;
+
+        if (h == hitbox.lf && color == "Blue")
             return 15f;
 
         return 0f;
