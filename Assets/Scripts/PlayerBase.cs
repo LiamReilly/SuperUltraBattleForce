@@ -26,7 +26,7 @@ public abstract class PlayerBase : MonoBehaviour
     public bool isTraining = false;
 
     protected Vector3 CharSpeed;
-    protected Animator anim;
+    public Animator anim;
     protected bool CannotAttack;
     protected bool Blocking = false;
     protected bool move;

@@ -408,10 +408,15 @@ public class GameManager : MonoBehaviour
         {
             var result = Rounds[0].IncreaseRoundCount();
             print("p1 won round");
+            PickedPlayers[0].GetComponent<PlayerBase>().anim.SetBool("Move", false);
+            PickedPlayers[1].GetComponent<PlayerBase>().anim.SetBool("Move", false);
+            PickedPlayers[0].GetComponent<PlayerBase>().anim.SetTrigger("Victory");
+            PickedPlayers[1].GetComponent<PlayerBase>().anim.SetTrigger("Defeat");
             PickedPlayers[0].GetComponent<PlayerBase>().enabled = false;
             PickedPlayers[1].GetComponent<PlayerBase>().enabled = false;
             Specialbars[1].GetComponent<SpecialBar>().frozen = true;
             Specialbars[2].GetComponent<SpecialBar>().frozen = true;
+            
             if (result)
             {
                 EndMatch(PickedPlayers[0].GetComponent<PlayerBase>());
@@ -425,10 +430,15 @@ public class GameManager : MonoBehaviour
         {
             var result = Rounds[1].IncreaseRoundCount();
             print("p2 won round");
+            PickedPlayers[0].GetComponent<PlayerBase>().anim.SetBool("Move", false);
+            PickedPlayers[1].GetComponent<PlayerBase>().anim.SetBool("Move", false);
+            PickedPlayers[0].GetComponent<PlayerBase>().anim.SetTrigger("Defeat");
+            PickedPlayers[1].GetComponent<PlayerBase>().anim.SetTrigger("Victory");
             PickedPlayers[0].GetComponent<PlayerBase>().enabled = false;
             PickedPlayers[1].GetComponent<PlayerBase>().enabled = false;
             Specialbars[1].GetComponent<SpecialBar>().frozen = true;
             Specialbars[2].GetComponent<SpecialBar>().frozen = true;
+            
             if (result)
             {
                 EndMatch(PickedPlayers[1].GetComponent<PlayerBase>());
