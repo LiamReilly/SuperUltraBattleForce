@@ -334,7 +334,7 @@ public class AIController : MonoBehaviour
 
     protected bool checkAggression(float level){
         Val<float> check = new Val<float>(() => aggressionFloat);
-        Debug.Log("Checking if " + check.Value + " is under " + level);
+        // Debug.Log("Checking if " + check.Value + " is under " + level);
         return check.Value < level;
     }
 

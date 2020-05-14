@@ -32,20 +32,20 @@ public class SpecialBar : MonoBehaviour
 
         if(specialBar.value >= 100f && !frozen)
         {
-            Color c = specialBar.image.color;
+            Color specialColor = specialBar.image.color;
 
-            if(c.g <= originalG)
+            if(specialColor.g <= originalG)
             {
                 direction = 1;
             }
-            if(c.g >= originalG + 0.2f)
+            if(specialColor.g >= originalG + 0.2f)
             {
                 direction = -1;
             }
 
-            Debug.Log(c.g);
+            // Debug.Log(c.g);
 
-            specialBar.image.color = new Color(c.r, c.g + direction*0.01f, c.b);
+            specialBar.image.color = new Color(specialColor.r, specialColor.g + direction*0.01f, specialColor.b);
         }
     }
     public float GetLevel()
