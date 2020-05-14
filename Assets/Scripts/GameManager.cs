@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         ONEPLAYER, TWOPLAYER, TRAINING, CPUMODE
     }
 
-    public static bool VisibleHitboxes = false;
+    public static bool VisibleHitboxes;
 
     private GameType gameType;
 
@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
         bar2 = Health.transform.GetChild(1).gameObject.GetComponent<HealthBar>();
         SceneManager.activeSceneChanged += ChangedActiveScene;
         //PauseItems.SetActive(false);
+
+        VisibleHitboxes = false;
     }
     private void Start()
     {
@@ -69,7 +71,8 @@ public class GameManager : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    {
+    { 
+
         if (matchStart)
         {
             gameTime -= Time.deltaTime;

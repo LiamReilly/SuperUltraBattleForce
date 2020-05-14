@@ -1713,6 +1713,7 @@ GameObject:
   - component: {fileID: 375535932}
   - component: {fileID: 375535931}
   - component: {fileID: 375535930}
+  - component: {fileID: 375535933}
   m_Layer: 0
   m_Name: Hitboxes visible
   m_TagString: Untagged
@@ -1781,7 +1782,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1796,6 +1797,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375535928}
   m_CullTransparentMesh: 0
+--- !u!114 &375535933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375535928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9cdd7b437e0434389613b0ff1b2f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  me: {fileID: 375535931}
 --- !u!1 &384335149
 GameObject:
   m_ObjectHideFlags: 0
