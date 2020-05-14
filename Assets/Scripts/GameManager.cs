@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
         ONEPLAYER, TWOPLAYER, TRAINING, CPUMODE
     }
 
+    public static bool VisibleHitboxes = false;
+
     private GameType gameType;
 
     public GameObject playerAIPrefab;
@@ -73,6 +75,11 @@ public class GameManager : MonoBehaviour
             gameTime -= Time.deltaTime;
             string time = string.Format("{0:N0}", gameTime);
             timer.text = time;
+
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                VisibleHitboxes = !VisibleHitboxes;
+            }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
