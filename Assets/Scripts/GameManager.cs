@@ -434,7 +434,7 @@ public class GameManager : MonoBehaviour
             
             if (result)
             {
-                EndMatch(PickedPlayers[0].GetComponent<PlayerBase>());
+                EndMatch(PickedPlayers[0].GetComponent<PlayerBase>().name);
             }
             else
             {
@@ -456,7 +456,7 @@ public class GameManager : MonoBehaviour
             
             if (result)
             {
-                EndMatch(PickedPlayers[1].GetComponent<PlayerBase>());
+                EndMatch(PickedPlayers[1].GetComponent<PlayerBase>().name);
             }
             else
             {
@@ -465,8 +465,32 @@ public class GameManager : MonoBehaviour
         }
         else if (PickedPlayers[0].GetComponent<PlayerBase>().currHealth == PickedPlayers[1].GetComponent<PlayerBase>().currHealth)
         {
-            //figure out what to do for ties
-            print("tie lul figure it out");
+            PickedPlayers[0].GetComponent<PlayerBase>().anim.SetBool("Move", false);
+            PickedPlayers[1].GetComponent<PlayerBase>().anim.SetBool("Move", false);
+            PickedPlayers[0].GetComponent<PlayerBase>().anim.SetTrigger("Defeat");
+            PickedPlayers[1].GetComponent<PlayerBase>().anim.SetTrigger("Defeat");
+            PickedPlayers[0].GetComponent<PlayerBase>().enabled = false;
+            PickedPlayers[1].GetComponent<PlayerBase>().enabled = false;
+            Specialbars[1].GetComponent<SpecialBar>().frozen = true;
+            Specialbars[2].GetComponent<SpecialBar>().frozen = true;
+            var result = Rounds[0].IncreaseRoundCount();
+            var result2 = Rounds[1].IncreaseRoundCount();
+            if (result&&result2)
+            {
+                EndMatch("It's a tie");
+            }
+            if (result&&!result2)
+            {
+                EndMatch(PickedPlayers[0].GetComponent<PlayerBase>().name);
+            }
+            if (!result&&result2)
+            {
+                EndMatch(PickedPlayers[1].GetComponent<PlayerBase>().name);
+            }
+            if (!result && !result2)
+            {
+                RoundReset();
+            }
         }
     }
     private void RoundReset()
@@ -479,16 +503,21 @@ public class GameManager : MonoBehaviour
         bar2.SetUp(PickedPlayers[1].GetComponent<PlayerBase>());
         StartCoroutine(ResetPlayers(3f));
     }
-    private void EndMatch(PlayerBase winner)
+    private void EndMatch(string winner)
     {
-        if (winner.name.StartsWith("R"))
+        if (winner.StartsWith("R"))
         {
-            string str = winner.name.Substring(0, 3);
+            string str = winner.Substring(0, 3);
             Countdown.GetComponent<Text>().text = str + "\nWins!";
         }
-        else
+        if (winner.StartsWith("I"))
         {
-            string str = winner.name.Substring(0, 4);
+            string str = winner;
+            Countdown.GetComponent<Text>().text = winner;
+        }
+        if (winner.StartsWith("B"))
+        { 
+            string str = winner.Substring(0, 4);
             Countdown.GetComponent<Text>().text = str + "\nWins!";
         }
         StartCoroutine(OfferEndofMatchOptions());

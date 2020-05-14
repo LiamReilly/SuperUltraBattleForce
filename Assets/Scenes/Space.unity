@@ -372,7 +372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456724590}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 7.8500023, y: 1.7320505, z: 0.00000089077616}
+  m_LocalPosition: {x: 7.8500023, y: 1.7320505, z: 0.0000008942552}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 962555439}
@@ -1155,7 +1155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538397909}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 7.8500023, y: 1.7320505, z: 0.00000089077616}
+  m_LocalPosition: {x: 7.8500023, y: 1.7320505, z: 0.0000008942552}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1169,7 +1169,7 @@ Skybox:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538397909}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: c0b48801b669eb145a11915b988c4e71, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: b79712470d84a5649bbac9d4c2e124d5, type: 2}
 --- !u!1 &1697764907
 GameObject:
   m_ObjectHideFlags: 0
