@@ -25,9 +25,10 @@ public class HealthBar : MonoBehaviour
     {
         //player = play;
         playerHealth = play;
-        healthBar.maxValue = playerHealth.maxHealth;
-        //healthBar.maxValue = 100f;
-        healthBar.value = healthBar.maxValue;
+        //healthBar.maxValue = playerHealth.maxHealth;
+        healthBar.maxValue = 100f;
+        healthBar.value = 100f;
+        //healthBar.value = healthBar.maxValue;
     }
     public float GetValue()
     {

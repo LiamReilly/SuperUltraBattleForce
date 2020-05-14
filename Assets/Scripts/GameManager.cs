@@ -182,6 +182,7 @@ public class GameManager : MonoBehaviour
                 FinishLevelSetup(p1, p2);
             }
             
+            
 
         }
     }
@@ -316,12 +317,14 @@ public class GameManager : MonoBehaviour
     public void Stage3()
     {
         Button.Play();
-        print("this doesn't do anything yet");
+        StageSelect.SetActive(false);
+        LoadLevel("Space");
     }
     public void Stage4()
     {
         Button.Play();
-        print("this doesn't do anything yet");
+        StageSelect.SetActive(false);
+        LoadLevel("whitehouse");
     }
     public void MusicLeft()
     {
@@ -534,7 +537,8 @@ public class GameManager : MonoBehaviour
             p1Script.isTraining = true;
             p2Script.isTraining = true;
         }
-        
+        ResetPlayers(1f);
+
 
     }
 }

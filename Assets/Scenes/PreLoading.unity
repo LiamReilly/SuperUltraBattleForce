@@ -975,7 +975,7 @@ GameObject:
   - component: {fileID: 254920907}
   - component: {fileID: 254920911}
   m_Layer: 0
-  m_Name: Placeholder
+  m_Name: Space
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2325,7 +2325,7 @@ GameObject:
   - component: {fileID: 505612621}
   - component: {fileID: 505612625}
   m_Layer: 0
-  m_Name: Placeholder
+  m_Name: Park
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2748,7 +2748,7 @@ GameObject:
   - component: {fileID: 630873781}
   - component: {fileID: 630873785}
   m_Layer: 0
-  m_Name: Placeholder
+  m_Name: Airport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5785,7 +5785,7 @@ GameObject:
   - component: {fileID: 1527234280}
   - component: {fileID: 1527234279}
   m_Layer: 0
-  m_Name: Text
+  m_Name: park
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5843,7 +5843,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Placeholder
+  m_Text: Park
 --- !u!222 &1527234280
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6699,7 +6699,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Placeholder
+  m_Text: Space
 --- !u!222 &1682019105
 CanvasRenderer:
   m_ObjectHideFlags: 0
