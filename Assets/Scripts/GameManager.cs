@@ -303,6 +303,8 @@ public class GameManager : MonoBehaviour
         Button.Play();
         GameTypeButtons.SetActive(false);
         CharacterSelect.SetActive(true);
+        CharacterChip.Selected = false;
+        Player2Chip.Selected = false;
         StartCoroutine(WaitForSelection(1f));
         //showStages();
     }

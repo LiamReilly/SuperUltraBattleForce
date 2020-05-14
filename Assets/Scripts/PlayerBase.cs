@@ -34,7 +34,6 @@ public abstract class PlayerBase : MonoBehaviour
     public Hitbox LHand, LFoot, RHand, RFoot;
     protected string color;
 
-    public float jumpCooldown;
     public float kickCooldown;
     public float punchCooldown;
     public float hadoukenCooldown;
@@ -81,15 +80,6 @@ public abstract class PlayerBase : MonoBehaviour
             setHitboxes(MoveTable.move.sK);
             anim.SetTrigger("RoundHouse");
             StartCoroutine(waitforattack(kickCooldown));
-        }
-    }
-    public void Jump()
-    {
-        if (!CannotAttack)
-        {
-            CannotAttack = true;
-            anim.SetTrigger("Jump");
-            StartCoroutine(waitforattack(jumpCooldown));
         }
     }
     public void Punch()

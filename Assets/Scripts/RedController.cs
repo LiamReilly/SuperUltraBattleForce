@@ -7,7 +7,6 @@ public class RedController : PlayerBase
     // Start is called before the first frame update
     void Start()
     {
-        jumpCooldown = 1f;
         kickCooldown = 0.9f;
         punchCooldown = 0.8f;
         hadoukenCooldown = 0.9f;
@@ -82,10 +81,6 @@ public class RedController : PlayerBase
                 if (Input.GetKeyDown(KeyCode.J))
                 {
                     QuickKick();
-                }
-                if (Input.GetKeyDown(KeyCode.W))
-                {
-                    Jump();
                 }
                 if (Input.GetKeyDown(KeyCode.I))
                 {
