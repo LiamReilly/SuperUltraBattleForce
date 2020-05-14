@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Airport.unity
     guid: 46901716d1f93c848867075684c14da9
+  - enabled: 1
+    path: Assets/Scenes/Space.unity
+    guid: 97e7193662802984887bec9a1cf61bbb
+  - enabled: 1
+    path: Assets/Scenes/whitehouse.unity
+    guid: 94d205064eb40d047bbd70f9230e2a39
   m_configObjects: {}

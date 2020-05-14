@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
         ONEPLAYER, TWOPLAYER, TRAINING, CPUMODE
     }
 
+    public static bool VisibleHitboxes;
+
     private GameType gameType;
 
     public GameObject playerAIPrefab;
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
         bar2 = Health.transform.GetChild(1).gameObject.GetComponent<HealthBar>();
         SceneManager.activeSceneChanged += ChangedActiveScene;
         //PauseItems.SetActive(false);
+
+        VisibleHitboxes = false;
     }
     private void Start()
     {
@@ -67,12 +71,18 @@ public class GameManager : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    {
+    { 
+
         if (matchStart)
         {
             gameTime -= Time.deltaTime;
             string time = string.Format("{0:N0}", gameTime);
             timer.text = time;
+
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                VisibleHitboxes = !VisibleHitboxes;
+            }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
@@ -181,6 +191,7 @@ public class GameManager : MonoBehaviour
                 PickedPlayers[1] = p2;
                 FinishLevelSetup(p1, p2);
             }
+            
             
 
         }
@@ -316,12 +327,14 @@ public class GameManager : MonoBehaviour
     public void Stage3()
     {
         Button.Play();
-        print("this doesn't do anything yet");
+        StageSelect.SetActive(false);
+        LoadLevel("Space");
     }
     public void Stage4()
     {
         Button.Play();
-        print("this doesn't do anything yet");
+        StageSelect.SetActive(false);
+        LoadLevel("whitehouse");
     }
     public void MusicLeft()
     {
@@ -534,7 +547,8 @@ public class GameManager : MonoBehaviour
             p1Script.isTraining = true;
             p2Script.isTraining = true;
         }
-        
+        ResetPlayers(1f);
+
 
     }
 }
