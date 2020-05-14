@@ -17,7 +17,12 @@ public class Hitbox : MonoBehaviour {
         damage = 0f;
         knockback = 0f;
     }
-    
+
+    public void Update()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = GameManager.VisibleHitboxes;
+    }
+
     public void set(float d)
     {
         set(d, d);
